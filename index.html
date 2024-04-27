@@ -204,6 +204,9 @@
         <h1 class="search-results__title">
           <!-- Dynamic title content will be inserted here -->
       </h1>
+      <div class ="search-results-order">
+
+      </div>
       <ul id="search-results" class="search-results__list">
 
         <!-- Dynamic list items will be inserted here -->
@@ -361,7 +364,7 @@ De data wordt aangeboden in CSV-formaat.&hellip;
           </ul>
           -->
   </section>
-
+<!--
 <div class="search-results__pagination">
   <nav aria-label="Page navigation">
     <ul class="pagination" id="pagination">
@@ -413,7 +416,7 @@ De data wordt aangeboden in CSV-formaat.&hellip;
     </ul>
   </nav>
 </div>
-
+-->
 
     </div>
   </div>
@@ -584,55 +587,90 @@ De data wordt aangeboden in CSV-formaat.&hellip;
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
+  function sortDossiers(dossiers, sortOrder) {
+    return dossiers.sort((a, b) => {
+      switch (sortOrder) {
+        case 'date-desc':
+          return new Date(b.foi_publishedDate) - new Date(a.foi_publishedDate);
+        case 'date-asc':
+          return new Date(a.foi_publishedDate) - new Date(b.foi_publishedDate);
+        case 'title-desc':
+          return b.dc_title.localeCompare(a.dc_title);
+        case 'title-asc':
+          return a.dc_title.localeCompare(b.dc_title);
+        default:
+          return 0; // No sorting applied
+      }
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function() {
     const urlParams = new URLSearchParams(window.location.search);
     const searchPid = urlParams.get('pid');
-    const searchQuery = urlParams.get('q');
+    let searchQuery = urlParams.get('q') || '';  // Ensure searchQuery is not null
     const searchYear = urlParams.get('year');
     const searchType = urlParams.get('type');
+    const sortOrder = urlParams.get('order') || 'relevance-desc';
     const jsonData = './json/listview.json';
 
     fetch(jsonData)
       .then(response => response.json())
       .then(data => {
-        const filteredDossiers = data.infobox.foi_dossiers.filter(dossier => {
-          let matchesPid = searchPid ? dossier.dc_identifier.includes(searchPid.replace(/\*/g, '')) : true;
-          let matchesQuery = searchQuery ? (dossier.dc_title.toLowerCase().includes(searchQuery.toLowerCase()) || dossier.dc_description.toLowerCase().includes(searchQuery.toLowerCase())) : true;
-          let matchesYear = searchYear ? dossier.dc_date_year === parseInt(searchYear) : true;
-          let matchesType = searchType ? dossier.dc_type === searchType : true;
-          return matchesPid && matchesQuery && matchesYear && matchesType;
+        let filteredDossiers = data.infobox.foi_dossiers.filter(dossier => {
+          return (!searchPid || dossier.dc_identifier.includes(searchPid.replace(/\*/g, ''))) &&
+                 (!searchQuery || dossier.dc_title.toLowerCase().includes(searchQuery.toLowerCase()) || dossier.dc_description.toLowerCase().includes(searchQuery.toLowerCase())) &&
+                 (!searchYear || dossier.dc_date_year === parseInt(searchYear)) &&
+                 (!searchType || dossier.dc_type === searchType);
         });
 
-        // Insert search bar
+        // Apply the sorting to the filtered results
+        filteredDossiers = sortDossiers(filteredDossiers, sortOrder);
+
         const searchBarHTML = `
-        <div class="navbar__search">
-            <button class="navbar__search-button" id="navbar-open-search">
-              <span class="sr-only">Open zoekveld</span>
-              <span class="mdi mdi-magnify" aria-hidden="true"></span>
-            </button>
-            <form action="index.html" method="get" class="autocomplete autocomplete__form" role="search">
-              <input placeholder="Zoeken" id="suggest-search-query" autocomplete="off" aria-label="Zoekveld" class="autocomplete__input form-control form-text mb-3" type="text" name="q">
-              <input type="hidden" name="order" value="relevance-desc">
-              <input type="hidden" name="country" value="nl">
-              <input type="hidden" name="publisher" value="gm0268">
-              <button aria-label="Search button" type="submit" id="odn-search-button" class="autocomplete__search-button form-submit js-form-submit">
+          <div class="navbar__search">
+              <button class="navbar__search-button" id="navbar-open-search">
+                <span class="sr-only">Open zoekveld</span>
                 <span class="mdi mdi-magnify" aria-hidden="true"></span>
               </button>
-              <button aria-label="Clear input" title="Clear input" type="button" class="autocomplete__clear-button autocomplete__button--hide">
-                <span class="mdi mdi-close" aria-hidden="true"></span>
+              <form action="index.html" method="get" class="autocomplete autocomplete__form" role="search">
+                <input placeholder="Waar bent u naar op zoek?" id="suggest-search-query" autocomplete="off" aria-label="Zoekveld" class="autocomplete__input form-control form-text mb-3" type="text" name="q" value="${searchQuery}">
+                <input type="hidden" name="order" value="${sortOrder}">
+                <input type="hidden" name="country" value="nl">
+                <input type="hidden" name="publisher" value="gm0268">
+                <button aria-label="Search button" type="submit" id="odn-search-button" class="autocomplete__search-button form-submit js-form-submit">
+                  <span class="mdi mdi-magnify" aria-hidden="true"></span>
+                </button>
+                <button aria-label="Clear input" title="Clear input" type="button" class="autocomplete__clear-button autocomplete__button--hide">
+                  <span class="mdi mdi-close" aria-hidden="true"></span>
+                </button>
+              </form>
+              <button class="navbar__search-close-button" id="navbar-close-search" aria-label="Sluit zoekveld">
+                Close
               </button>
-            </form>
-            <button class="navbar__search-close-button" id="navbar-close-search" aria-label="Sluit zoekveld">
-              Close
-            </button>
-          </div>`;
+              
+            </div>`;
         document.querySelector('.results_wrapper').insertAdjacentHTML('afterbegin', searchBarHTML);
+
+        const orderingHTML = `
+          <div class="woo-ordering">
+            <select class="woo-ordering-select form-select form-select-sm mb-3" id="order" onchange="updateQueryParams(this.value)">
+              <option value="relevance-desc" ${sortOrder === 'relevance-desc' ? 'selected' : ''}>Relevantie ↓</option>
+              <option value="relevance-asc" ${sortOrder === 'relevance-asc' ? 'selected' : ''}>Relevantie ↑</option>
+              <option value="date-desc" ${sortOrder === 'date-desc' ? 'selected' : ''}>Datum ↓</option>
+              <option value="date-asc" ${sortOrder === 'date-asc' ? 'selected' : ''}>Datum ↑</option>
+              <option value="type-desc" ${sortOrder === 'type-desc' ? 'selected' : ''}>Type ↓</option>
+              <option value="type-asc" ${sortOrder === 'type-asc' ? 'selected' : ''}>Type ↑</option>
+              <option value="title-desc" ${sortOrder === 'title-desc' ? 'selected' : ''}>Titel ↓</option>
+              <option value="title-asc" ${sortOrder === 'title-asc' ? 'selected' : ''}>Titel ↑</option>
+            </select>
+          </div>`;
+        document.querySelector('.search-results-order').insertAdjacentHTML('afterbegin', orderingHTML);
 
         const listItems = filteredDossiers.map(dossier => {
           const detailUrl = `dossier.html?pid=${dossier.dc_identifier}`;
           return `<li class="search-results__item">
             <h2 class="search-results__item-title">
-              <a href="${detailUrl}" target="_blank">${capitalizeFirstLetter(dossier.dc_title)}</a>
+              <a href="${detailUrl}">${capitalizeFirstLetter(dossier.dc_title)}</a>
             </h2>
             <div class="search-results__item-body"><p>${capitalizeFirstLetter(dossier.dc_description)}</p></div>
             <span class="badge badge-success mr-2" itemprop="encodingFormat">${capitalizeFirstLetter(dossier.tooiwl_topic || '')}</span>
@@ -644,12 +682,16 @@ De data wordt aangeboden in CSV-formaat.&hellip;
         document.getElementById('search-results').innerHTML = listItems;
 
         let resultText = 'Alle Dossiers';
-        if (searchQuery) {
-          resultText = `${filteredDossiers.length} Resultaten voor "${searchQuery}"`;
-        } else if (searchYear) {
-          resultText = `${filteredDossiers.length} Resultaten voor het jaar "${searchYear}"`;
-        } else if (searchType) {
-          resultText = `${filteredDossiers.length} Resultaten voor type "${searchType}"`;
+        if (filteredDossiers.length === 1) {
+          resultText = `${filteredDossiers.length} resultaat voor "${searchQuery}"`;
+        } else {
+          if (searchQuery) {
+            resultText = `${filteredDossiers.length} resultaten voor "${searchQuery}"`;
+          } else if (searchYear) {
+            resultText = `${filteredDossiers.length} resultaten voor het jaar "${searchYear}"`;
+          } else if (searchType) {
+            resultText = `${filteredDossiers.length} resultaten voor type "${searchType}"`;
+          }
         }
 
         document.querySelector('.search-results__title').innerText = resultText;
@@ -675,14 +717,12 @@ De data wordt aangeboden in CSV-formaat.&hellip;
         const yearSet = new Set(data.infobox.foi_dossiers.map(dossier => dossier.dc_date_year.toString()));
         const topicSet = new Set(data.infobox.foi_dossiers.map(dossier => dossier.tooiwl_topic));
         
-        
-
         const typeHtml = Array.from(typeSet).map(type => {
           return `<li class="facets__item">
             <a class="facets__link" href="?type=${type}">${capitalizeFirstLetter(type)}</a>
           </li>`;
         }).join('');
-
+        
         const yearHtml = Array.from(yearSet).map(year => {
           return `<li class="facets__item">
             <a class="facets__link" href="?year=${year}">${year}</a>
@@ -699,16 +739,26 @@ De data wordt aangeboden in CSV-formaat.&hellip;
             <h2 class="facets__group-title">Jaar</h2>
             <ul class="facets__list">${yearHtml}</ul>
           </div>
-          <div class="facets__group">
-            <h2 class="facets__group-title">Thema</h2>
-            <ul class="facets__list">${topicHtml}</ul>
-          </div>
+         
+          
           `;
       })
       .catch(error => console.log('Error loading the JSON data: ', error));
   });
+
+  function updateQueryParams(newOrder) {
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('order', newOrder);
+    window.location.search = urlParams.toString();
+  }
 </script>
 
+<!--
+<div class="facets__group">
+  <h2 class="facets__group-title">Thema</h2>
+  <ul class="facets__list">${topicHtml}</ul>
+</div>
+-->
 
 
 
