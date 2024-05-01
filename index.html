@@ -364,11 +364,12 @@ De data wordt aangeboden in CSV-formaat.&hellip;
           </ul>
           -->
   </section>
-<!--
+
 <div class="search-results__pagination">
+
   <nav aria-label="Page navigation">
     <ul class="pagination" id="pagination">
-                        
+      <!--                  
                     
       
       <li class="page-item page-item-previous  disabled ">
@@ -413,10 +414,12 @@ De data wordt aangeboden in CSV-formaat.&hellip;
           <span class="sr-only">Volgende</span>
         </a>
       </li>
+      -->
     </ul>
   </nav>
+
 </div>
--->
+
 
     </div>
   </div>
@@ -583,10 +586,12 @@ De data wordt aangeboden in CSV-formaat.&hellip;
 <script src="https://opendata.nijmegen.nl/sites/default/files/js/js_WIjuGQNgDclX4rx0qDxjFQdBTAJ2rFkL3ywGYIeI3ps.js"></script>
 
 <script>
+  // Function to capitalize the first letter of a string
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
+  // Function to sort dossiers based on different criteria
   function sortDossiers(dossiers, sortOrder) {
     return dossiers.sort((a, b) => {
       switch (sortOrder) {
@@ -599,19 +604,20 @@ De data wordt aangeboden in CSV-formaat.&hellip;
         case 'title-asc':
           return a.dc_title.localeCompare(b.dc_title);
         default:
-          return 0; // No sorting applied
+          return 0; // If no sort order is specified, do not sort
       }
     });
   }
 
+  // Listener for DOMContentLoaded event to ensure the DOM is fully loaded before executing
   document.addEventListener("DOMContentLoaded", function() {
     const urlParams = new URLSearchParams(window.location.search);
     const searchPid = urlParams.get('pid');
-    let searchQuery = urlParams.get('q') || '';  // Ensure searchQuery is not null
+    let searchQuery = urlParams.get('q') || '';  // Handle undefined search query
     const searchYear = urlParams.get('year');
     const searchType = urlParams.get('type');
     const sortOrder = urlParams.get('order') || 'relevance-desc';
-    const jsonData = './json/listview.json';
+    const jsonData = './json/listview.json'; // JSON data path
 
     fetch(jsonData)
       .then(response => response.json())
@@ -623,34 +629,35 @@ De data wordt aangeboden in CSV-formaat.&hellip;
                  (!searchType || dossier.dc_type === searchType);
         });
 
-        // Apply the sorting to the filtered results
+        // Sorting the filtered dossiers
         filteredDossiers = sortDossiers(filteredDossiers, sortOrder);
 
+        // Inserting the search bar HTML
         const searchBarHTML = `
           <div class="navbar__search">
-              <button class="navbar__search-button" id="navbar-open-search">
-                <span class="sr-only">Open zoekveld</span>
+            <button class="navbar__search-button" id="navbar-open-search">
+              <span class="sr-only">Open zoekveld</span>
+              <span class="mdi mdi-magnify" aria-hidden="true"></span>
+            </button>
+            <form action="index.html" method="get" class="autocomplete autocomplete__form" role="search">
+              <input placeholder="Waar bent u naar op zoek?" id="suggest-search-query" autocomplete="off" aria-label="Zoekveld" class="autocomplete__input form-control form-text mb-3" type="text" name="q" value="${searchQuery}">
+              <input type="hidden" name="order" value="${sortOrder}">
+              <input type="hidden" name="country" value="nl">
+              <input type="hidden" name="publisher" value="gm0268">
+              <button aria-label="Search button" type="submit" id="odn-search-button" class="autocomplete__search-button form-submit js-form-submit">
                 <span class="mdi mdi-magnify" aria-hidden="true"></span>
               </button>
-              <form action="index.html" method="get" class="autocomplete autocomplete__form" role="search">
-                <input placeholder="Waar bent u naar op zoek?" id="suggest-search-query" autocomplete="off" aria-label="Zoekveld" class="autocomplete__input form-control form-text mb-3" type="text" name="q" value="${searchQuery}">
-                <input type="hidden" name="order" value="${sortOrder}">
-                <input type="hidden" name="country" value="nl">
-                <input type="hidden" name="publisher" value="gm0268">
-                <button aria-label="Search button" type="submit" id="odn-search-button" class="autocomplete__search-button form-submit js-form-submit">
-                  <span class="mdi mdi-magnify" aria-hidden="true"></span>
-                </button>
-                <button aria-label="Clear input" title="Clear input" type="button" class="autocomplete__clear-button autocomplete__button--hide">
-                  <span class="mdi mdi-close" aria-hidden="true"></span>
-                </button>
-              </form>
-              <button class="navbar__search-close-button" id="navbar-close-search" aria-label="Sluit zoekveld">
-                Close
+              <button aria-label="Clear input" title="Clear input" type="button" class="autocomplete__clear-button autocomplete__button--hide">
+                <span class="mdi mdi-close" aria-hidden="true"></span>
               </button>
-              
-            </div>`;
+            </form>
+            <button class="navbar__search-close-button" id="navbar-close-search" aria-label="Sluit zoekveld">
+              Close
+            </button>
+          </div>`;
         document.querySelector('.results_wrapper').insertAdjacentHTML('afterbegin', searchBarHTML);
 
+        // Inserting the ordering HTML
         const orderingHTML = `
           <div class="woo-ordering">
             <select class="woo-ordering-select form-select form-select-sm mb-3" id="order" onchange="updateQueryParams(this.value)">
@@ -666,13 +673,17 @@ De data wordt aangeboden in CSV-formaat.&hellip;
           </div>`;
         document.querySelector('.search-results-order').insertAdjacentHTML('afterbegin', orderingHTML);
 
+        // Generating and displaying list items for each dossier
         const listItems = filteredDossiers.map(dossier => {
           const detailUrl = `dossier.html?pid=${dossier.dc_identifier}`;
           return `<li class="search-results__item">
             <h2 class="search-results__item-title">
               <a href="${detailUrl}">${capitalizeFirstLetter(dossier.dc_title)}</a>
             </h2>
-            <div class="search-results__item-body"><p>${capitalizeFirstLetter(dossier.dc_description)}</p></div>
+            <div class="search-results__item-body">
+              <p>${capitalizeFirstLetter(dossier.dc_description)}</p>
+              
+              </div>
             <span class="badge badge-success mr-2" itemprop="encodingFormat">${capitalizeFirstLetter(dossier.tooiwl_topic || '')}</span>
             <span class="badge badge-info mr-2">${capitalizeFirstLetter(dossier.foi_valuation || '')}</span>
             <span class="badge badge-primary">Publicatie: ${dossier.foi_publishedDate || ''}</span>
@@ -681,6 +692,7 @@ De data wordt aangeboden in CSV-formaat.&hellip;
 
         document.getElementById('search-results').innerHTML = listItems;
 
+        // Updating search results title based on filter criteria
         let resultText = 'Alle Dossiers';
         if (filteredDossiers.length === 1) {
           resultText = `${filteredDossiers.length} resultaat voor "${searchQuery}"`;
@@ -696,6 +708,7 @@ De data wordt aangeboden in CSV-formaat.&hellip;
 
         document.querySelector('.search-results__title').innerText = resultText;
 
+        // Displaying breadcrumb navigation
         let breadcrumbHtml = `
           <div class="container">
             <div class="row">
@@ -713,16 +726,17 @@ De data wordt aangeboden in CSV-formaat.&hellip;
           </div>`;
         document.getElementById('breadcrumb').innerHTML = breadcrumbHtml;
 
+        // Creating HTML for facets based on dossier data
         const typeSet = new Set(data.infobox.foi_dossiers.map(dossier => dossier.dc_type));
         const yearSet = new Set(data.infobox.foi_dossiers.map(dossier => dossier.dc_date_year.toString()));
         const topicSet = new Set(data.infobox.foi_dossiers.map(dossier => dossier.tooiwl_topic));
-        
+
         const typeHtml = Array.from(typeSet).map(type => {
           return `<li class="facets__item">
             <a class="facets__link" href="?type=${type}">${capitalizeFirstLetter(type)}</a>
           </li>`;
         }).join('');
-        
+
         const yearHtml = Array.from(yearSet).map(year => {
           return `<li class="facets__item">
             <a class="facets__link" href="?year=${year}">${year}</a>
@@ -739,19 +753,22 @@ De data wordt aangeboden in CSV-formaat.&hellip;
             <h2 class="facets__group-title">Jaar</h2>
             <ul class="facets__list">${yearHtml}</ul>
           </div>
-         
-          
-          `;
+        `;
       })
       .catch(error => console.log('Error loading the JSON data: ', error));
   });
 
+  // Function to update the query parameters in the URL
   function updateQueryParams(newOrder) {
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.set('order', newOrder);
     window.location.search = urlParams.toString();
   }
 </script>
+
+
+
+
 
 <!--
 <div class="facets__group">
