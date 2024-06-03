@@ -1,0 +1,11 @@
+/* Styles for facet counts */
+.woogle-grey{
+    color: #888; /* Grey color for the count text */
+}
+
+
+.remove-facet {
+    float: right;
+    color: grey;
+    cursor: pointer;
+}
