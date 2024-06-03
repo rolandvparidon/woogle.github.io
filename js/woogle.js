@@ -361,21 +361,18 @@ function changePage(newPage) {
 }
 
 function updateResultsTitle(filteredDossiers, searchQuery, searchYear, searchType) {
-    let resultText = 'Alle Dossiers';
-    if (filteredDossiers.length === 1) {
-        resultText = `${filteredDossiers.length} resultaat voor "${searchQuery}"`;
-    } else {
-        if (searchQuery) {
-            resultText = `${filteredDossiers.length} resultaten voor "${searchQuery}"`;
-        }
-        if (searchYear) {
-            resultText = `${filteredDossiers.length} resultaten voor het jaar "${searchYear}"`;
-        }
-        if (searchType) {
-            const typeName = getTypeName(searchType) || capitalizeFirstLetter(searchType);
-            resultText = `${filteredDossiers.length} resultaten voor ${facetDisplayNames['type'].toLowerCase()} "${typeName}"`;
+    let resultText = 'Alle dossiers';
+    
+    const hasFilters = searchQuery || searchYear || searchType;
+
+    if (hasFilters) {
+        if (filteredDossiers.length === 1) {
+            resultText = `${filteredDossiers.length} dossier`;
+        } else {
+            resultText = `${filteredDossiers.length} dossiers`;
         }
     }
+
     document.querySelector('.search-results__title').innerText = resultText;
 }
 
