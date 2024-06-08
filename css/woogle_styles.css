@@ -9,3 +9,33 @@
     color: grey;
     cursor: pointer;
 }
+/* Update */
+.search-results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-results__title {
+    margin: 0;
+    flex-grow: 1;
+    text-align: right;
+    font-weight: 300;
+}
+
+.search-results-order {
+    margin-left: 1rem; /* Add space between title and sort order */
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.search-results__title::after {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 1.5rem; /* Adjust the height as needed */
+    background-color: #ccc; /* Adjust the color as needed */
+    margin-left: 1rem; /* Adjust the spacing as needed */
+}

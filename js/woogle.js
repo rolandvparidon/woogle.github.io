@@ -32,6 +32,8 @@ function sortDossiers(dossiers, sortOrder) {
     });
 }
 
+let cachedData = null;
+
 /**
  * Initializes the application by fetching JSON data and setting up the UI.
  */
@@ -40,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function initApp() {
     const searchQuery = urlParams.get('q') || '';
     const searchType = urlParams.get('type') || '';
     const searchYear = urlParams.get('year') || '';
-    
+
     // Determine the sort order based on the presence of facets or search query
     let sortOrder = 'date-desc';
     if (searchQuery || searchType || searchYear) {
@@ -48,14 +50,21 @@ document.addEventListener("DOMContentLoaded", function initApp() {
     } else {
         sortOrder = urlParams.get('order') || 'date-desc';
     }
-    
+
     const currentPage = parseInt(urlParams.get('page')) || 1;
     const jsonData = './json/nijmegen.json';
 
-    fetch(jsonData)
-        .then(response => response.json())
-        .then(data => setupUI(data, searchQuery, sortOrder, currentPage))
-        .catch(error => console.error('Error loading the JSON data:', error));
+    if (!cachedData) {
+        fetch(jsonData)
+            .then(response => response.json())
+            .then(data => {
+                cachedData = data;
+                setupUI(data, searchQuery, sortOrder, currentPage);
+            })
+            .catch(error => console.error('Error loading the JSON data:', error));
+    } else {
+        setupUI(cachedData, searchQuery, sortOrder, currentPage);
+    }
 });
 
 /**
@@ -76,7 +85,19 @@ function updateFacetSelection(key, value, remove = false) {
     // Reset page to 1 whenever a facet is selected or deselected
     urlParams.set('page', 1);
 
-    window.location.search = urlParams.toString();
+    // Update URL without reloading the page
+    history.pushState(null, '', '?' + urlParams.toString());
+
+    // Retrieve updated URL parameters
+    const searchQuery = urlParams.get('q') || '';
+    const searchType = urlParams.get('type') || '';
+    const searchYear = urlParams.get('year') || '';
+    const sortOrder = urlParams.get('order') || 'relevance-desc';
+
+    // Update the UI with filtered data immediately using cached data
+    if (cachedData) {
+        setupUI(cachedData, searchQuery, sortOrder, 1);
+    }
 }
 
 /**
@@ -140,13 +161,6 @@ function removeAllFilters() {
     window.location.search = urlParams.toString();
 }
 
-/**
- * Sets up the user interface with data obtained from the JSON fetch.
- * @param {Object} data - The JSON data containing dossiers.
- * @param {string} searchQuery - The search query to filter by.
- * @param {string} sortOrder - The sort order parameter.
- * @param {number} currentPage - The current page for pagination.
- */
 function setupUI(data, searchQuery, sortOrder, currentPage) {
     try {
         const urlParams = new URLSearchParams(window.location.search);
@@ -162,12 +176,39 @@ function setupUI(data, searchQuery, sortOrder, currentPage) {
         }
 
         console.log('Setting up UI with filteredDossiers:', filteredDossiers);
+
+        // Inject the entire structure into results_wrapper
+        const resultsWrapper = document.querySelector('.results_wrapper');
+        resultsWrapper.innerHTML = `
+            <section class="search-results">
+                <div class="search-results-header">
+                    <h1>WOO Dossiers</h1>
+                    <p itemprop="description" class="search-results__title"></p>
+                    <div class="search-results-order">
+                        <!-- Sorting buttons will be inserted here -->
+                    </div>
+                </div>
+                <div class="navbar__search">
+                    <!-- Search bar will be inserted here -->
+                </div>
+                <ul id="search-results" class="search-results__list">
+                    <!-- Dynamic list items will be inserted here -->
+                </ul>
+                <div class="search-results__pagination">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination" id="pagination">
+                        </ul>
+                    </nav>
+                </div>
+            </section>
+        `;
+
         insertSearchComponents(searchQuery, sortOrder);
         insertOrderingComponents(sortOrder);
         displayDossiers(filteredDossiers, currentPage);
         updateResultsTitle(filteredDossiers, searchQuery, searchYear, searchType);
         setupFacets(filteredDossiers);
-        setupSelectedFacets(); // Call the setupSelectedFacets function
+        setupSelectedFacets();
         renderPaginationControls(totalResults, currentPage);
         setupBreadcrumbNavigation();
     } catch (error) {
@@ -177,43 +218,74 @@ function setupUI(data, searchQuery, sortOrder, currentPage) {
 
 
   /**
-   * Inserts search-related components into the DOM.
-   * @param {string} searchQuery - The current search query.
-   * @param {string} sortOrder - The current sort order.
-   */
-  function insertSearchComponents(searchQuery, sortOrder) {
-    const searchBarHTML = `<div class="navbar__search">
-      <button class="navbar__search-button" id="navbar-open-search">
-        <span class="sr-only">Open zoekveld</span>
-        <span class="mdi mdi-magnify" aria-hidden="true"></span>
-      </button>
-      <form action="index.html" method="get" class="autocomplete autocomplete__form" role="search">
-        <input placeholder="Waar bent u naar op zoek?" id="suggest-search-query" autocomplete="off" aria-label="Zoekveld" class="autocomplete__input form-control form-text mb-3" type="text" name="q" value="${searchQuery}">
-        <input type="hidden" name="order" value="${sortOrder}">
-        <input type="hidden" name="country" value="nl">
-        <input type="hidden" name="publisher" value="gm0268">
-        <button aria-label="Search button" type="submit" id="odn-search-button" class="autocomplete__search-button form-submit js-form-submit">
-          <span class="mdi mdi-magnify" aria-hidden="true"></span>
+ * Inserts search-related components into the DOM.
+ * @param {string} searchQuery - The current search query.
+ * @param {string} sortOrder - The current sort order.
+ */
+function insertSearchComponents(searchQuery, sortOrder) {
+    const searchBarHTML = `
+        <button class="navbar__search-button" id="navbar-open-search">
+            <span class="sr-only">Open zoekveld</span>
+            <span class="mdi mdi-magnify" aria-hidden="true"></span>
         </button>
-        <button aria-label="Clear input" title="Clear input" type="button" class="autocomplete__clear-button autocomplete__button--hide">
-          <span class="mdi mdi-close" aria-hidden="true"></span>
+        <form id="search-form" class="autocomplete autocomplete__form" role="search">
+            <input placeholder="Waar bent u naar op zoek?" id="suggest-search-query" autocomplete="off" aria-label="Zoekveld" class="autocomplete__input form-control form-text mb-3" type="text" name="q" value="${searchQuery}">
+            <input type="hidden" name="order" value="${sortOrder}">
+            <input type="hidden" name="country" value="nl">
+            <input type="hidden" name="publisher" value="gm0268">
+            <button aria-label="Search button" type="submit" id="odn-search-button" class="autocomplete__search-button form-submit js-form-submit">
+                <span class="mdi mdi-magnify" aria-hidden="true"></span>
+            </button>
+            <button aria-label="Clear input" title="Clear input" type="button" class="autocomplete__clear-button autocomplete__button--hide">
+                <span class="mdi mdi-close" aria-hidden="true"></span>
+            </button>
+        </form>
+        <button class="navbar__search-close-button" id="navbar-close-search" aria-label="Sluit zoekveld">
+            Close
         </button>
-      </form>
-      <button class="navbar__search-close-button" id="navbar-close-search" aria-label="Sluit zoekveld">
-        Close
-      </button>
-    </div>`;
-    document.querySelector('.results_wrapper').insertAdjacentHTML('afterbegin', searchBarHTML);
-  }
+    `;
+    document.querySelector('.navbar__search').innerHTML = searchBarHTML;
+
+    // Add event listener to the search form
+    document.getElementById('search-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        const searchQuery = document.getElementById('suggest-search-query').value;
+        updateSearchQuery(searchQuery);
+    });
+}
+
+/**
+ * Updates the search query parameter and triggers UI update.
+ * @param {string} searchQuery - The new search query.
+ */
+function updateSearchQuery(searchQuery) {
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('q', searchQuery);
+    urlParams.set('page', 1); // Reset to page 1 for new search
+
+    // Update URL without reloading the page
+    history.pushState(null, '', '?' + urlParams.toString());
+
+    // Retrieve updated URL parameters
+    const searchType = urlParams.get('type') || '';
+    const searchYear = urlParams.get('year') || '';
+    const sortOrder = urlParams.get('order') || 'relevance-desc';
+    const currentPage = parseInt(urlParams.get('page')) || 1;
+
+    // Update the UI with filtered data immediately using cached data
+    if (cachedData) {
+        setupUI(cachedData, searchQuery, sortOrder, currentPage);
+    }
+}
 
 /**
  * Inserts ordering-related components into the DOM.
  * @param {string} sortOrder - The current sort order.
  */
- function insertOrderingComponents(sortOrder) {
+function insertOrderingComponents(sortOrder) {
     const orderingHTML = `
         <div class="woo-ordering">
-            <select class="woo-ordering-select form-select form-select-sm mb-3" id="order" onchange="updateQueryParams(this.value)">
+            <select class="woo-ordering-select form-select form-select-sm" id="order" onchange="updateQueryParams(this.value)">
                 <option value="relevance-desc" ${sortOrder === 'relevance-desc' ? 'selected' : ''}>Relevantie ↓</option>
                 <option value="relevance-asc" ${sortOrder === 'relevance-asc' ? 'selected' : ''}>Relevantie ↑</option>
                 <option value="date-desc" ${sortOrder === 'date-desc' ? 'selected' : ''}>Datum ↓</option>
@@ -224,7 +296,7 @@ function setupUI(data, searchQuery, sortOrder, currentPage) {
                 <option value="title-asc" ${sortOrder === 'title-asc' ? 'selected' : ''}>Titel ↑</option>
             </select>
         </div>`;
-    document.querySelector('.search-results-order').insertAdjacentHTML('afterbegin', orderingHTML);
+    document.querySelector('.search-results-order').innerHTML = orderingHTML;
 }
 
 
@@ -347,17 +419,20 @@ function renderPaginationControls(totalResults, currentPage) {
 function changePage(newPage) {
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.set('page', newPage);
-    window.location.search = urlParams.toString();
-}
 
-/**
- * Changes the page and updates the URL parameters.
- * @param {number} newPage - The new page number to navigate to.
- */
-function changePage(newPage) {
-    const urlParams = new URLSearchParams(window.location.search);
-    urlParams.set('page', newPage);
-    window.location.search = urlParams.toString();
+    // Update URL without reloading the page
+    history.pushState(null, '', '?' + urlParams.toString());
+
+    // Retrieve updated URL parameters
+    const searchQuery = urlParams.get('q') || '';
+    const searchType = urlParams.get('type') || '';
+    const searchYear = urlParams.get('year') || '';
+    const sortOrder = urlParams.get('order') || 'relevance-desc';
+
+    // Update the UI with filtered data immediately using cached data
+    if (cachedData) {
+        setupUI(cachedData, searchQuery, sortOrder, newPage);
+    }
 }
 
 function updateResultsTitle(filteredDossiers, searchQuery, searchYear, searchType) {
@@ -509,12 +584,25 @@ function setupFacets(filteredDossiers) {
 }
 
 
-  /**
-   * Updates the query parameters in the URL when the sort order is changed.
-   * @param {string} newOrder - The new sort order to apply.
-   */
-  function updateQueryParams(newOrder) {
+/**
+ * Updates the query parameters in the URL when the sort order is changed.
+ * @param {string} newOrder - The new sort order to apply.
+ */
+function updateQueryParams(newOrder) {
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.set('order', newOrder);
-    window.location.search = urlParams.toString();
-  }
+    urlParams.set('page', 1); // Reset to the first page whenever the sorting order is changed
+
+    // Update URL without reloading the page
+    history.pushState(null, '', '?' + urlParams.toString());
+
+    // Retrieve updated URL parameters
+    const searchQuery = urlParams.get('q') || '';
+    const searchType = urlParams.get('type') || '';
+    const searchYear = urlParams.get('year') || '';
+
+    // Update the UI with filtered data immediately using cached data
+    if (cachedData) {
+        setupUI(cachedData, searchQuery, newOrder, 1);
+    }
+}

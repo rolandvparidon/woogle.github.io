@@ -1,6 +1,6 @@
 // woogle_dossier.js
 
-
+let cachedDossierData = null;
 
 /**
  * Retrieves a query parameter value from the URL.
@@ -185,7 +185,6 @@ function generateFileGroupsHtml(dossier, fileGroups) {
 
     return contentHtml;
 }
-
 /**
  * Generates the HTML content for the side panel.
  * @param {Object} dossier - The dossier object.
@@ -264,46 +263,55 @@ document.addEventListener("DOMContentLoaded", function() {
         return;
     }
 
-    fetchJsonData('./json/nijmegen.json')
-        .then(data => {
-            const dossier = data.infobox.foi_dossiers.find(d => d.dc_identifier === dossierId);
-            if (!dossier) {
-                console.error('Dossier not found.');
-                document.querySelector('.dataset-body').innerHTML = '<p>Dossier not found.</p>';
-                return;
-            }
-
-            updateFormAction(dossierId);
-
-            const breadcrumbHtml = generateBreadcrumbHtml(dossier.dc_title);
-            document.getElementById('breadcrumb').innerHTML = breadcrumbHtml;
-
-            const mainContentHtml = generateMainContentHtml(dossier);
-            document.querySelector('.dataset-body').innerHTML = mainContentHtml;
-
-            const fileGroups = {
-                'verzoek': [],
-                'besluit': [],
-                'bijlage': [],
-                'overige': []
-            };
-
-            dossier.foi_files.forEach(file => {
-                if (fileGroups[file.dc_type]) {
-                    fileGroups[file.dc_type].push(file);
-                } else {
-                    fileGroups['overige'].push(file);
-                }
+    if (cachedDossierData) {
+        renderDossierPage(cachedDossierData, dossierId);
+    } else {
+        fetchJsonData('./json/nijmegen.json')
+            .then(data => {
+                cachedDossierData = data;
+                renderDossierPage(data, dossierId);
+            })
+            .catch(error => {
+                console.error('Error loading JSON data:', error);
+                document.querySelector('.dataset-body').innerHTML = '<p>Error loading data.</p>';
             });
-
-            const fileGroupsHtml = generateFileGroupsHtml(dossier, fileGroups);
-            document.querySelector('.dataset-body').insertAdjacentHTML('beforeend', fileGroupsHtml);
-
-            const sidePanelHtml = generateSidePanelHtml(dossier);
-            document.querySelector('.col-lg-3.col-md-3.col-xs-12.pr-0').innerHTML = sidePanelHtml;
-        })
-        .catch(error => {
-            console.error('Error loading JSON data:', error);
-            document.querySelector('.dataset-body').innerHTML = '<p>Error loading data.</p>';
-        });
+    }
 });
+
+function renderDossierPage(data, dossierId) {
+    const dossier = data.infobox.foi_dossiers.find(d => d.dc_identifier === dossierId);
+    if (!dossier) {
+        console.error('Dossier not found.');
+        document.querySelector('.dataset-body').innerHTML = '<p>Dossier not found.</p>';
+        return;
+    }
+
+    updateFormAction(dossierId);
+
+    const breadcrumbHtml = generateBreadcrumbHtml(dossier.dc_title);
+    document.getElementById('breadcrumb').innerHTML = breadcrumbHtml;
+
+    const mainContentHtml = generateMainContentHtml(dossier);
+    document.querySelector('.dataset-body').innerHTML = mainContentHtml;
+
+    const fileGroups = {
+        'verzoek': [],
+        'besluit': [],
+        'bijlage': [],
+        'overige': []
+    };
+
+    dossier.foi_files.forEach(file => {
+        if (fileGroups[file.dc_type]) {
+            fileGroups[file.dc_type].push(file);
+        } else {
+            fileGroups['overige'].push(file);
+        }
+    });
+
+    const fileGroupsHtml = generateFileGroupsHtml(dossier, fileGroups);
+    document.querySelector('.dataset-body').insertAdjacentHTML('beforeend', fileGroupsHtml);
+
+    const sidePanelHtml = generateSidePanelHtml(dossier);
+    document.querySelector('.col-lg-3.col-md-3.col-xs-12.pr-0').innerHTML = sidePanelHtml;
+}
