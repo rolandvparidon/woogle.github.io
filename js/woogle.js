@@ -286,18 +286,19 @@ function updateSearchQuery(searchQuery) {
  */
 function insertOrderingComponents(sortOrder) {
     const orderingHTML = `
-        <div class="woo-ordering">
-            <select class="woo-ordering-select form-select form-select-sm" id="order" onchange="updateQueryParams(this.value)">
-                <option value="relevance-desc" ${sortOrder === 'relevance-desc' ? 'selected' : ''}>Relevantie ↓</option>
-                <option value="relevance-asc" ${sortOrder === 'relevance-asc' ? 'selected' : ''}>Relevantie ↑</option>
-                <option value="date-desc" ${sortOrder === 'date-desc' ? 'selected' : ''}>Datum ↓</option>
-                <option value="date-asc" ${sortOrder === 'date-asc' ? 'selected' : ''}>Datum ↑</option>
-                <option value="type-desc" ${sortOrder === 'type-desc' ? 'selected' : ''}>Type ↓</option>
-                <option value="type-asc" ${sortOrder === 'type-asc' ? 'selected' : ''}>Type ↑</option>
-                <option value="title-desc" ${sortOrder === 'title-desc' ? 'selected' : ''}>Titel ↓</option>
-                <option value="title-asc" ${sortOrder === 'title-asc' ? 'selected' : ''}>Titel ↑</option>
-            </select>
-        </div>`;
+    <div class="woo-ordering">
+    <label for="order" class="sr-only">Sorteren op</label>
+    <select class="woo-ordering-select form-select form-select-sm" id="order" onchange="updateQueryParams(this.value)">
+        <option value="relevance-desc" ${sortOrder === 'relevance-desc' ? 'selected' : ''}>Relevantie ↓</option>
+        <option value="relevance-asc" ${sortOrder === 'relevance-asc' ? 'selected' : ''}>Relevantie ↑</option>
+        <option value="date-desc" ${sortOrder === 'date-desc' ? 'selected' : ''}>Datum ↓</option>
+        <option value="date-asc" ${sortOrder === 'date-asc' ? 'selected' : ''}>Datum ↑</option>
+        <option value="type-desc" ${sortOrder === 'type-desc' ? 'selected' : ''}>Type ↓</option>
+        <option value="type-asc" ${sortOrder === 'type-asc' ? 'selected' : ''}>Type ↑</option>
+        <option value="title-desc" ${sortOrder === 'title-desc' ? 'selected' : ''}>Titel ↓</option>
+        <option value="title-asc" ${sortOrder === 'title-asc' ? 'selected' : ''}>Titel ↑</option>
+    </select>
+</div>`;
     document.querySelector('.search-results-order').innerHTML = orderingHTML;
 }
 
@@ -521,6 +522,10 @@ function filterDossiers(data, searchQuery, sortOrder, searchYear, searchType) {
         }
 
         const filteredDossiers = data.infobox.foi_dossiers.filter(dossier => {
+            if (dossier.dc_type === '1e-i') {
+                return false; // Exclude dossiers with dc_type of '1e-i'
+            }
+
             const title = dossier.dc_title ? dossier.dc_title.toLowerCase() : '';
             const description = dossier.dc_description ? dossier.dc_description.toLowerCase() : '';
 
