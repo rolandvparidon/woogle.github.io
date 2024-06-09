@@ -154,13 +154,28 @@ function setupSelectedFacets() {
 /**
  * Removes all filters by resetting the URL parameters.
  */
+/**
+ * Removes all filters by resetting the URL parameters and updates the UI using cached data.
+ */
 function removeAllFilters() {
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.delete('type');
     urlParams.delete('year');
     urlParams.delete('q');
     urlParams.delete('page');
-    window.location.search = urlParams.toString();
+    history.pushState(null, '', '?' + urlParams.toString());
+
+    // Retrieve updated URL parameters
+    const searchQuery = urlParams.get('q') || '';
+    const searchType = urlParams.get('type') || '';
+    const searchYear = urlParams.get('year') || '';
+    const sortOrder = urlParams.get('order') || 'relevance-desc';
+    const currentPage = parseInt(urlParams.get('page')) || 1;
+
+    // Update the UI with filtered data immediately using cached data
+    if (cachedData) {
+        setupUI(cachedData, searchQuery, sortOrder, currentPage);
+    }
 }
 
 function setupUI(data, searchQuery, sortOrder, currentPage) {
