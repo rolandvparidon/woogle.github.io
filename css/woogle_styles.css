@@ -9,6 +9,11 @@
     color: grey;
     cursor: pointer;
 }
+
+.search-results__item-body{
+    margin-bottom: 1rem;
+}
+
 /* Update */
 .search-results-header {
     display: flex;
@@ -39,3 +44,20 @@
     background-color: #ccc; /* Adjust the color as needed */
     margin-left: 1rem; /* Adjust the spacing as needed */
 }
+
+
+
+.matching-files-list {
+    /* margin-left: 28px; */
+    margin-top: 10px;
+}
+
+.accordion__button{
+    padding: 1.225rem .625rem;
+    font-size: 1.5rem;
+}
+
+
+
+
+

@@ -64,8 +64,10 @@ document.addEventListener("DOMContentLoaded", function initApp() {
             .catch(error => console.error('Error loading the JSON data:', error));
     } else {
         setupUI(cachedData, searchQuery, sortOrder, currentPage);
+    
     }
 });
+
 
 /**
  * Updates the URL parameters when a facet is selected or deselected.
@@ -205,7 +207,7 @@ function setupUI(data, searchQuery, sortOrder, currentPage) {
 
         insertSearchComponents(searchQuery, sortOrder);
         insertOrderingComponents(sortOrder);
-        displayDossiers(filteredDossiers, currentPage);
+        displayDossiers(filteredDossiers, currentPage, searchQuery); // Pass searchQuery here
         updateResultsTitle(filteredDossiers, searchQuery, searchYear, searchType);
         setupFacets(filteredDossiers);
         setupSelectedFacets();
@@ -305,7 +307,9 @@ function insertOrderingComponents(sortOrder) {
  * @param {Array} filteredDossiers - Array of filtered and sorted dossiers.
  * @param {number} currentPage - The current page for pagination.
  */
-function displayDossiers(filteredDossiers, currentPage) {
+let uniqueIdCounter = 0;
+
+function displayDossiers(filteredDossiers, currentPage, searchQuery) {
     // Calculate start and end indices for the current page
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
     const endIndex = startIndex + ITEMS_PER_PAGE;
@@ -316,9 +320,39 @@ function displayDossiers(filteredDossiers, currentPage) {
         const detailUrl = `dossier.html?pid=${dossier.dc_identifier}`;
         const title = dossier.dc_title ? capitalizeFirstLetter(dossier.dc_title) : '';
         const description = dossier.dc_description ? truncateText(capitalizeFirstLetter(dossier.dc_description), 250) : '';
-        const fileNames = dossier.foi_files && dossier.foi_files.length > 0
-            ? dossier.foi_files.map(file => `<p>${file.foi_fileName}</p>`).join('')
-            : '';
+
+        // Generate matching files list if any
+        let matchingFiles = '';
+        if (dossier.foi_files && searchQuery) {
+            const matchedFiles = dossier.foi_files.filter(file => {
+                const fileTitle = file.dc_title || file.foi_fileName || '';
+                return fileTitle.toLowerCase().includes(searchQuery.toLowerCase());
+            });
+            if (matchedFiles.length > 0) {
+                const matchingFileItems = matchedFiles.map(file => {
+                    const fileTitle = file.dc_title || file.foi_fileName || 'Naamloos bestand';
+                    return `<li>${fileTitle}</li>`;
+                }).join('');
+                const uniqueId = `collapse-${uniqueIdCounter++}`;
+                matchingFiles = `
+                    <div class="accordion" id="accordion-${uniqueId}">
+                        <div class="card">
+                            <div class="card-header" id="heading-${uniqueId}">
+                                <h3 class="card-title mb-0">
+                                    <button class="accordion__button collapsed" data-toggle="collapse" data-parent="#accordion-${uniqueId}" data-target="#${uniqueId}" aria-controls="${uniqueId}" aria-expanded="false">
+                                        Gevonden bestanden
+                                    </button>
+                                </h3>
+                            </div>
+                            <div id="${uniqueId}" role="tabpanel" aria-labelledby="heading-${uniqueId}" class="collapse">
+                                <div class="card-block">
+                                    <ul>${matchingFileItems}</ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            }
+        }
 
         return `<li class="search-results__item">
             <h2 class="search-results__item-title">
@@ -326,14 +360,32 @@ function displayDossiers(filteredDossiers, currentPage) {
             </h2>
             <div class="search-results__item-body">
                 <p>${description}</p>
-                
             </div>
+            <div class="search-results__item-body">
             <span class="badge badge-success mr-2" itemprop="encodingFormat">${capitalizeFirstLetter(dossier.tooiwl_topic || '')}</span>
             <span class="badge badge-info mr-2">${capitalizeFirstLetter(dossier.foi_valuation || '')}</span>
             <span class="badge badge-primary">Publicatie: ${dossier.foi_publishedDate || ''}</span>
+            </div>
+            ${matchingFiles} <!-- Add matching files accordion here -->
         </li>`;
     }).join('');
     document.getElementById('search-results').innerHTML = listItems;
+
+    // Reinitialize Bootstrap tooltips and accordions
+    const accordions = document.querySelectorAll('.accordion');
+    accordions.forEach(acc => {
+        const buttons = acc.querySelectorAll('button[data-toggle="collapse"]');
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                const target = document.querySelector(button.dataset.target);
+                if (target.classList.contains('show')) {
+                    target.classList.remove('show');
+                } else {
+                    target.classList.add('show');
+                }
+            });
+        });
+    });
 }
 
 /**
@@ -472,14 +524,20 @@ function filterDossiers(data, searchQuery, sortOrder, searchYear, searchType) {
             const title = dossier.dc_title ? dossier.dc_title.toLowerCase() : '';
             const description = dossier.dc_description ? dossier.dc_description.toLowerCase() : '';
 
-            // Exclude documents of type '1e' (Bereikbaarheidsgegevens)
-            if (dossier.dc_type === '1e' || dossier.dc_type === '1e-i') {
-                return false;
+            let matchesQuery = !searchQuery || title.includes(searchQuery.toLowerCase()) || description.includes(searchQuery.toLowerCase());
+
+            if (!matchesQuery && searchQuery) {
+                matchesQuery = dossier.foi_files.some(file => file.dc_title && file.dc_title.toLowerCase().includes(searchQuery.toLowerCase()));
             }
 
-            return (!searchQuery || title.includes(searchQuery.toLowerCase()) || description.includes(searchQuery.toLowerCase())) &&
-                   (!searchYear || dossier.dc_date_year === parseInt(searchYear)) &&
-                   (!searchType || dossier.dc_type === searchType);
+            const matchesYear = !searchYear || dossier.dc_date_year === parseInt(searchYear);
+            const matchesType = !searchType || dossier.dc_type === searchType;
+
+            if (matchesQuery && matchesYear && matchesType) {
+                console.log('Matched Dossier:', dossier);
+            }
+
+            return matchesQuery && matchesYear && matchesType;
         });
 
         const sortedDossiers = sortDossiers(filteredDossiers, sortOrder);

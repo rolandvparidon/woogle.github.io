@@ -98,25 +98,7 @@ function generateMainContentHtml(dossier) {
                 </div>
             </a>
         </div>
-        <div class="navbar__search">
-            <button class="navbar__search-button" id="navbar-open-search">
-                <span class="sr-only">Open zoekveld</span>
-                <span class="mdi mdi-magnify" aria-hidden="true"></span>
-            </button>
-            <form action="index.html" method="GET" class="chip donl-chip autocomplete autocomplete__form" role="search">
-                <input itemprop="keywords" type="hidden" name="pid" value="${dossier.dc_identifier}">
-                <input placeholder="Zoek binnen dit dossier" id="suggest-search-query" autocomplete="off" aria-controls="autocomplete-results" aria-autocomplete="both" aria-label="Zoekveld" aria-describedby="autocomplete-help-text" class="autocomplete__input form-control mb-3" type="text" name="q" style="font-size: .8125rem; color: #212121; font-weight: 600;">
-                <button aria-label="Search button" type="submit" id="odn-search-button" class="autocomplete__search-button form-submit js-form-submit">
-                    <span class="mdi mdi-magnify" aria-hidden="true"></span>
-                </button>
-                <button aria-label="Clear input" title="Clear input" type="button" class="autocomplete__clear-button autocomplete__button--hide">
-                    <span class="mdi mdi-close" aria-hidden="true"></span>
-                </button>
-            </form>
-            <button class="navbar__search-close-button" id="navbar-close-search" aria-label="Sluit zoekveld">
-                Close
-            </button>
-        </div>`;
+        `;
 }
 
 /**
@@ -156,11 +138,12 @@ function generateFileGroupsHtml(dossier, fileGroups) {
                 const downloadUrl = `https://pid.wooverheid.nl/${file.dc_identifier}`;
                 const pageText = file.foi_nrPages === 1 ? 'pagina' : 'pagina\'s'; // Handle pluralization of page count
                 const fairiscore = getFairScore(file); // Use getFairScore function
+                const fileName = (dossier.dc_type === '2i') ? file.foi_fileName : file.dc_title; // Use foi_fileName for type '2i', dc_title for others
 
                 contentHtml += `
                     <tr itemprop="distribution" itemscope itemtype="https://schema.org/DataDownload">
                         <th>
-                            <span itemprop="name">${file.foi_fileName}</span>
+                            <span itemprop="name">${fileName || 'Naamloos bestand'}</span>
                             <p class="font-weight-normal" itemprop="text">${file.dc_identifier}</p>
                             <p class="font-weight-normal">
                                 <span class="badge badge-success mr-2">Fairiscore: ${fairiscore}</span>
@@ -314,4 +297,12 @@ function renderDossierPage(data, dossierId) {
 
     const sidePanelHtml = generateSidePanelHtml(dossier);
     document.querySelector('.col-lg-3.col-md-3.col-xs-12.pr-0').innerHTML = sidePanelHtml;
+
+    // Update the document title with the dc_title, truncated if necessary
+    const maxTitleLength = 50;
+    let truncatedTitle = dossier.dc_title;
+    if (truncatedTitle.length > maxTitleLength) {
+        truncatedTitle = truncatedTitle.substring(0, maxTitleLength) + '...';
+    }
+    document.title = `Dossier: ${truncatedTitle}`;
 }
