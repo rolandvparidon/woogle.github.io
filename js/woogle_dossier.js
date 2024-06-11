@@ -1,5 +1,3 @@
-// woogle_dossier.js
-
 let cachedDossierData = null;
 
 /**
@@ -18,7 +16,7 @@ function getQueryParam(param) {
  * @returns {Promise<Object>} A promise that resolves to the JSON data.
  */
 function fetchJsonData(url) {
-    return fetch(url)
+    return fetch(url, { mode: 'cors' })
         .then(response => response.json())
         .catch(error => {
             console.error('Error loading JSON data:', error);
@@ -168,6 +166,7 @@ function generateFileGroupsHtml(dossier, fileGroups) {
 
     return contentHtml;
 }
+
 /**
  * Generates the HTML content for the side panel.
  * @param {Object} dossier - The dossier object.
@@ -175,7 +174,7 @@ function generateFileGroupsHtml(dossier, fileGroups) {
  */
 function generateSidePanelHtml(dossier) {
     const fairiscore = getFairScore(dossier); // Use getFairScore function
-    const typeCode = dossier.dc_type; 
+    const typeCode = dossier.dc_type;
     const typeDisplayName = getTypeName(typeCode); // Use getTypeName function
     return `
         <div class="row mb-3">
@@ -246,23 +245,21 @@ document.addEventListener("DOMContentLoaded", function() {
         return;
     }
 
-    if (cachedDossierData) {
-        renderDossierPage(cachedDossierData, dossierId);
-    } else {
-        fetchJsonData('./json/nijmegen.json')
-            .then(data => {
-                cachedDossierData = data;
-                renderDossierPage(data, dossierId);
-            })
-            .catch(error => {
-                console.error('Error loading JSON data:', error);
-                document.querySelector('.dataset-body').innerHTML = '<p>Error loading data.</p>';
-            });
-    }
+    const apiUrl = `https://pid.wooverheid.nl/?pid=${dossierId}&infobox=true`;
+
+    fetchJsonData(apiUrl)
+        .then(data => {
+            cachedDossierData = data.infobox;
+            renderDossierPage(data.infobox, dossierId);
+        })
+        .catch(error => {
+            console.error('Error loading JSON data:', error);
+            document.querySelector('.dataset-body').innerHTML = '<p>Error loading data.</p>';
+        });
 });
 
 function renderDossierPage(data, dossierId) {
-    const dossier = data.infobox.foi_dossiers.find(d => d.dc_identifier === dossierId);
+    const dossier = data;
     if (!dossier) {
         console.error('Dossier not found.');
         document.querySelector('.dataset-body').innerHTML = '<p>Dossier not found.</p>';

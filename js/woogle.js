@@ -42,39 +42,32 @@ document.addEventListener("DOMContentLoaded", function initApp() {
     const searchQuery = urlParams.get('q') || '';
     const searchType = urlParams.get('type') || '';
     const searchYear = urlParams.get('year') || '';
-
-    // Determine the sort order based on the presence of facets or search query
-    let sortOrder = 'date-desc';
-    if (searchQuery || searchType || searchYear) {
-        sortOrder = 'relevance-desc';
-    } else {
-        sortOrder = urlParams.get('order') || 'date-desc';
-    }
-
+    const sortOrder = urlParams.get('order') || (searchQuery || searchType || searchYear ? 'relevance-desc' : 'date-desc');
     const currentPage = parseInt(urlParams.get('page')) || 1;
-    const jsonData = './json/nijmegen.json';
 
-    if (!cachedData) {
-        fetch(jsonData)
-            .then(response => response.json())
-            .then(data => {
-                cachedData = data;
-                setupUI(data, searchQuery, sortOrder, currentPage);
-            })
-            .catch(error => console.error('Error loading the JSON data:', error));
-    } else {
-        setupUI(cachedData, searchQuery, sortOrder, currentPage);
-    
-    }
+    fetchSearchResults(searchQuery, searchType, searchYear, sortOrder, currentPage);
 });
 
+function fetchSearchResults(searchQuery, searchType, searchYear, sortOrder, currentPage) {
+    let apiUrl = `https://woogle.wooverheid.nl/search?q=${encodeURIComponent(searchQuery)}&publisher=gm0268&order=${sortOrder}&country=nl&infobox=true&page=${currentPage}`;
 
-/**
- * Updates the URL parameters when a facet is selected or deselected.
- * @param {string} key - The key of the facet (type, year, search).
- * @param {string} value - The value of the facet.
- * @param {boolean} remove - Whether to remove the facet from the selection.
- */
+    if (searchType) {
+        apiUrl += `&type=${searchType}`;
+    }
+    if (searchYear) {
+        apiUrl += `&year=${searchYear}`;
+    }
+
+    console.log('Fetching from API URL:', apiUrl); // Debugging line
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            setupUI(data, searchQuery, sortOrder, currentPage);
+        })
+        .catch(error => console.error('Error fetching search results:', error));
+}
+
 function updateFacetSelection(key, value, remove = false) {
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -84,22 +77,62 @@ function updateFacetSelection(key, value, remove = false) {
         urlParams.set(key === 'search' ? 'q' : key, value);
     }
 
-    // Reset page to 1 whenever a facet is selected or deselected
     urlParams.set('page', 1);
-
-    // Update URL without reloading the page
     history.pushState(null, '', '?' + urlParams.toString());
 
-    // Retrieve updated URL parameters
     const searchQuery = urlParams.get('q') || '';
     const searchType = urlParams.get('type') || '';
     const searchYear = urlParams.get('year') || '';
     const sortOrder = urlParams.get('order') || 'relevance-desc';
+    const currentPage = 1;
 
-    // Update the UI with filtered data immediately using cached data
-    if (cachedData) {
-        setupUI(cachedData, searchQuery, sortOrder, 1);
+    fetchSearchResults(searchQuery, searchType, searchYear, sortOrder, currentPage);
+}
+
+
+/**
+ * Updates the URL parameters when a facet is selected or deselected and fetches new data.
+ * @param {string} key - The key of the facet (type, year, publisher).
+ * @param {string} value - The value of the facet.
+ * @param {boolean} remove - Whether to remove the facet from the selection.
+ */
+function updateFacetSelection(key, value, remove = false) {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    if (remove) {
+        urlParams.delete(key);
+    } else {
+        urlParams.set(key, value);
     }
+
+    // Reset page to 1 whenever a facet is selected or deselected
+    urlParams.set('page', 1);
+
+    // Construct the new query URL
+    const searchQuery = urlParams.get('q') || '*';
+    const searchType = urlParams.get('type') || '';
+    const searchYear = urlParams.get('year') || '';
+    const sortOrder = urlParams.get('order') || 'relevance-desc';
+    const publisher = urlParams.get('publisher') || 'gm0268';
+    const country = urlParams.get('country') || 'nl';
+    const infobox = 'true';
+
+    const apiUrl = `https://woogle.wooverheid.nl/search?q=${encodeURIComponent(searchQuery)}&publisher=${publisher}&order=${sortOrder}&country=${country}&infobox=${infobox}&type=${searchType}&year=${searchYear}`;
+
+    // Fetch the data from the Woogle API
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            // Cache the new data
+            cachedData = data;
+
+            // Update the URL without reloading the page
+            history.pushState(null, '', '?' + urlParams.toString());
+
+            // Update the UI with the new data
+            setupUI(data, searchQuery, sortOrder, 1);
+        })
+        .catch(error => console.error('Error fetching the JSON data:', error));
 }
 
 /**
@@ -154,9 +187,6 @@ function setupSelectedFacets() {
 /**
  * Removes all filters by resetting the URL parameters.
  */
-/**
- * Removes all filters by resetting the URL parameters and updates the UI using cached data.
- */
 function removeAllFilters() {
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.delete('type');
@@ -165,34 +195,29 @@ function removeAllFilters() {
     urlParams.delete('page');
     history.pushState(null, '', '?' + urlParams.toString());
 
-    // Retrieve updated URL parameters
     const searchQuery = urlParams.get('q') || '';
     const searchType = urlParams.get('type') || '';
     const searchYear = urlParams.get('year') || '';
     const sortOrder = urlParams.get('order') || 'relevance-desc';
-    const currentPage = parseInt(urlParams.get('page')) || 1;
+    const currentPage = 1;
 
-    // Update the UI with filtered data immediately using cached data
-    if (cachedData) {
-        setupUI(cachedData, searchQuery, sortOrder, currentPage);
-    }
+    fetchSearchResults(searchQuery, searchType, searchYear, sortOrder, currentPage);
 }
 
+/**
+ * Sets up the UI with the provided data, search query, sort order, and current page.
+ * @param {Object} data - The fetched data from the API.
+ * @param {string} searchQuery - The current search query.
+ * @param {string} sortOrder - The current sort order.
+ * @param {number} currentPage - The current page number.
+ */
 function setupUI(data, searchQuery, sortOrder, currentPage) {
     try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const searchYear = urlParams.get('year') || '';
-        const searchType = urlParams.get('type') || '';
+        const dossiers = data.hits || [];
+        const totalResults = data.total_hits || 0;
+        const totalPages = data.total_pages || 0;
 
-        console.log('Calling filterDossiers with:', { data, searchQuery, sortOrder, searchYear, searchType });
-        const { filteredDossiers, totalResults } = filterDossiers(data, searchQuery, sortOrder, searchYear, searchType);
-        
-        if (!Array.isArray(filteredDossiers)) {
-            console.error('filteredDossiers is not an array:', filteredDossiers);
-            throw new TypeError('filteredDossiers is not an array');
-        }
-
-        console.log('Setting up UI with filteredDossiers:', filteredDossiers);
+        console.log('Setting up UI with filteredDossiers:', dossiers);
 
         // Inject the entire structure into results_wrapper
         const resultsWrapper = document.querySelector('.results_wrapper');
@@ -200,7 +225,7 @@ function setupUI(data, searchQuery, sortOrder, currentPage) {
             <section class="search-results">
                 <div class="search-results-header">
                     <h1>WOO Dossiers</h1>
-                    <p itemprop="description" class="search-results__title"></p>
+                    <p itemprop="description" class="search-results__title">${totalResults} dossiers gevonden</p>
                     <div class="search-results-order">
                         <!-- Sorting buttons will be inserted here -->
                     </div>
@@ -222,11 +247,11 @@ function setupUI(data, searchQuery, sortOrder, currentPage) {
 
         insertSearchComponents(searchQuery, sortOrder);
         insertOrderingComponents(sortOrder);
-        displayDossiers(filteredDossiers, currentPage, searchQuery); // Pass searchQuery here
-        updateResultsTitle(filteredDossiers, searchQuery, searchYear, searchType);
-        setupFacets(filteredDossiers);
+        displayDossiers(dossiers, currentPage, searchQuery); // Pass searchQuery here
+        updateResultsTitle(dossiers, totalResults, searchQuery, '', ''); // Pass totalResults here
+        setupFacets(data.facets);
         setupSelectedFacets();
-        renderPaginationControls(totalResults, currentPage);
+        renderPaginationControls(totalPages, currentPage);
         setupBreadcrumbNavigation();
     } catch (error) {
         console.error('Error in setupUI:', error);
@@ -234,19 +259,21 @@ function setupUI(data, searchQuery, sortOrder, currentPage) {
 }
 
 
-  /**
+
+/**
  * Inserts search-related components into the DOM.
  * @param {string} searchQuery - The current search query.
  * @param {string} sortOrder - The current sort order.
  */
 function insertSearchComponents(searchQuery, sortOrder) {
+    const displayQuery = searchQuery === '*' ? '' : searchQuery;
     const searchBarHTML = `
         <button class="navbar__search-button" id="navbar-open-search">
             <span class="sr-only">Open zoekveld</span>
             <span class="mdi mdi-magnify" aria-hidden="true"></span>
         </button>
         <form id="search-form" class="autocomplete autocomplete__form" role="search">
-            <input placeholder="Waar bent u naar op zoek?" id="suggest-search-query" autocomplete="off" aria-label="Zoekveld" class="autocomplete__input form-control form-text mb-3" type="text" name="q" value="${searchQuery}">
+            <input placeholder="Waar bent u naar op zoek?" id="suggest-search-query" autocomplete="off" aria-label="Zoekveld" class="autocomplete__input form-control form-text mb-3" type="text" name="q" value="${displayQuery}">
             <input type="hidden" name="order" value="${sortOrder}">
             <input type="hidden" name="country" value="nl">
             <input type="hidden" name="publisher" value="gm0268">
@@ -280,19 +307,30 @@ function updateSearchQuery(searchQuery) {
     urlParams.set('q', searchQuery);
     urlParams.set('page', 1); // Reset to page 1 for new search
 
-    // Update URL without reloading the page
-    history.pushState(null, '', '?' + urlParams.toString());
-
     // Retrieve updated URL parameters
     const searchType = urlParams.get('type') || '';
     const searchYear = urlParams.get('year') || '';
     const sortOrder = urlParams.get('order') || 'relevance-desc';
-    const currentPage = parseInt(urlParams.get('page')) || 1;
+    const publisher = urlParams.get('publisher') || 'gm0268';
+    const country = urlParams.get('country') || 'nl';
+    const infobox = 'true';
 
-    // Update the UI with filtered data immediately using cached data
-    if (cachedData) {
-        setupUI(cachedData, searchQuery, sortOrder, currentPage);
-    }
+    const apiUrl = `https://woogle.wooverheid.nl/search?q=${encodeURIComponent(searchQuery)}&publisher=${publisher}&order=${sortOrder}&country=${country}&infobox=${infobox}&type=${searchType}&year=${searchYear}`;
+
+    // Fetch the data from the Woogle API
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            // Cache the new data
+            cachedData = data;
+
+            // Update the URL without reloading the page
+            history.pushState(null, '', '?' + urlParams.toString());
+
+            // Update the UI with the new data
+            setupUI(data, searchQuery, sortOrder, 1);
+        })
+        .catch(error => console.error('Error fetching the JSON data:', error));
 }
 
 /**
@@ -325,29 +363,43 @@ function insertOrderingComponents(sortOrder) {
  */
 let uniqueIdCounter = 0;
 
-function displayDossiers(filteredDossiers, currentPage, searchQuery) {
-    // Calculate start and end indices for the current page
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const endIndex = startIndex + ITEMS_PER_PAGE;
-    const paginatedDossiers = filteredDossiers.slice(startIndex, endIndex);
+/**
+ * Displays the filtered and sorted dossiers in the UI.
+ * @param {Array} dossiers - Array of filtered and sorted dossiers.
+ * @param {number} currentPage - The current page for pagination.
+ * @param {string} searchQuery - The current search query.
+ */
+function displayDossiers(dossiers, currentPage, searchQuery) {
+    // Log the page and dossiers for debugging
+    console.log('Displaying dossiers for page:', currentPage);
+    console.log('Paginated dossiers:', dossiers);
 
     // Generating and displaying list items for each dossier
-    const listItems = paginatedDossiers.map(dossier => {
+    const listItems = dossiers.map(dossier => {
         const detailUrl = `dossier.html?pid=${dossier.dc_identifier}`;
         const title = dossier.dc_title ? capitalizeFirstLetter(dossier.dc_title) : '';
         const description = dossier.dc_description ? truncateText(capitalizeFirstLetter(dossier.dc_description), 250) : '';
 
         // Generate matching files list if any
         let matchingFiles = '';
-        if (dossier.foi_files && searchQuery) {
-            const matchedFiles = dossier.foi_files.filter(file => {
-                const fileTitle = file.dc_title || file.foi_fileName || '';
-                return fileTitle.toLowerCase().includes(searchQuery.toLowerCase());
-            });
-            if (matchedFiles.length > 0) {
-                const matchingFileItems = matchedFiles.map(file => {
-                    const fileTitle = file.dc_title || file.foi_fileName || 'Naamloos bestand';
-                    return `<li>${fileTitle}</li>`;
+        if (dossier.foi_pagehits) {
+            const pageHits = Object.values(dossier.foi_pagehits);
+            if (pageHits.length > 0) {
+                const matchingFileItems = pageHits.map(hit => {
+                    const docTitle = hit.dc_docTitle || '';
+                    let highlight = hit.foi_highlight || '';
+                    const pageNumber = hit.foi_pageNumber || '';
+                    const dcSource = hit.dc_source.replace('https://pid.wooverheid.nl/?pid=', 'dossier.html?pid=');
+
+                    // Remove characters before the first significant word
+                    const highlightText = highlight.replace(/<em>pagina<\/em>\s*\d+\n\s*/, '');
+
+                    return `
+                        <div class="search-results__item">
+                            <h4>${docTitle}</h4>
+                            <p><a href="${dcSource}">${highlightText}</a></p>
+                            <span class="badge badge-primary">Pagina ${pageNumber}</span>
+                        </div>`;
                 }).join('');
                 const uniqueId = `collapse-${uniqueIdCounter++}`;
                 matchingFiles = `
@@ -362,7 +414,7 @@ function displayDossiers(filteredDossiers, currentPage, searchQuery) {
                             </div>
                             <div id="${uniqueId}" role="tabpanel" aria-labelledby="heading-${uniqueId}" class="collapse">
                                 <div class="card-block">
-                                    <ul>${matchingFileItems}</ul>
+                                    ${matchingFileItems}
                                 </div>
                             </div>
                         </div>
@@ -402,17 +454,114 @@ function displayDossiers(filteredDossiers, currentPage, searchQuery) {
             });
         });
     });
+
+    console.log('Dossiers displayed successfully.');
 }
+
+
+
+
+
+/**
+ * Updates the search results title with the number of total results.
+ * @param {Array} filteredDossiers - Array of filtered and sorted dossiers.
+ * @param {number} totalResults - The total number of results.
+ * @param {string} searchQuery - The current search query.
+ * @param {string} searchYear - The current search year.
+ * @param {string} searchType - The current search type.
+ */
+function updateResultsTitle(filteredDossiers, totalResults, searchQuery, searchYear, searchType) {
+    let resultText = 'Alle dossiers';
+    
+    const hasFilters = searchQuery || searchYear || searchType;
+
+    if (hasFilters) {
+        resultText = `${totalResults} dossiers gevonden`;
+    }
+
+    document.querySelector('.search-results__title').innerText = resultText;
+}
+
+
+/**
+ * Filters dossiers based on URL parameters such as search query, year, and type.
+ * @param {Object} data - The data object containing all dossiers.
+ * @param {string} searchQuery - The search query to filter by.
+ * @param {string} sortOrder - The sort order parameter.
+ * @param {string} searchYear - The year to filter by.
+ * @param {string} searchType - The type to filter by.
+ * @returns {Object} An object containing the filtered dossiers and the total count.
+ */
+function filterDossiers(data, searchQuery, sortOrder, searchYear, searchType) {
+    try {
+        if (!data.hits || !Array.isArray(data.hits)) {
+            console.error('Invalid data structure:', data);
+            throw new TypeError('data.hits is not an array');
+        }
+
+        const filteredDossiers = data.hits.filter(dossier => {
+            if (dossier.dc_type === '1e-i') {
+                return false; // Exclude dossiers with dc_type of '1e-i'
+            }
+
+            const title = dossier.dc_title ? dossier.dc_title.toLowerCase() : '';
+            const description = dossier.dc_description ? dossier.dc_description.toLowerCase() : '';
+
+            let matchesQuery = !searchQuery || title.includes(searchQuery.toLowerCase()) || description.includes(searchQuery.toLowerCase());
+
+            if (!matchesQuery && searchQuery) {
+                matchesQuery = dossier.foi_documents.some(file => file.dc_title && file.dc_title.toLowerCase().includes(searchQuery.toLowerCase()));
+            }
+
+            const matchesYear = !searchYear || dossier.dc_date_year === parseInt(searchYear);
+            const matchesType = !searchType || dossier.dc_type === searchType;
+
+            if (matchesQuery && matchesYear && matchesType) {
+                console.log('Matched Dossier:', dossier);
+            }
+
+            return matchesQuery && matchesYear && matchesType;
+        });
+
+        const sortedDossiers = sortDossiers(filteredDossiers, sortOrder);
+
+        console.log('Filtered Dossiers:', sortedDossiers);
+        return { filteredDossiers: sortedDossiers, totalResults: sortedDossiers.length };
+    } catch (error) {
+        console.error('Error in filterDossiers:', error);
+        return { filteredDossiers: [], totalResults: 0 };
+    }
+}
+
+  /**
+   * Sets up breadcrumb navigation in the UI.
+   */
+   function setupBreadcrumbNavigation() {
+    // Displaying breadcrumb navigation as in your original script
+    let breadcrumbHtml = `
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 ml-0 mr-0 pr-0 pl-0">
+            <ol class="breadcrumb pr-0 pl-0">
+              <li class="breadcrumb-item">
+                <a href="https://opendata.nijmegen.nl/">Home</a>
+              </li>
+              <li class="breadcrumb-item active">
+                <a href="index.html">Woogle</a>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>`;
+    document.getElementById('breadcrumb').innerHTML = breadcrumbHtml;
+  }
 
 /**
  * Renders pagination controls based on the total number of results and the current page.
- * @param {number} totalResults - The total number of filtered results.
+ * @param {number} totalPages - The total number of pages.
  * @param {number} currentPage - The current page for pagination.
  */
-function renderPaginationControls(totalResults, currentPage) {
-    const totalPages = Math.ceil(totalResults / ITEMS_PER_PAGE);
-    if (totalPages <= 1) return;
-
+function renderPaginationControls(totalPages, currentPage) {
     const paginationContainer = document.querySelector('#pagination');
     paginationContainer.innerHTML = '';
 
@@ -488,146 +637,49 @@ function changePage(newPage) {
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.set('page', newPage);
 
+    // Log the new URL for debugging
+    console.log('New URL:', '?' + urlParams.toString());
+
     // Update URL without reloading the page
     history.pushState(null, '', '?' + urlParams.toString());
 
     // Retrieve updated URL parameters
-    const searchQuery = urlParams.get('q') || '';
+    const searchQuery = urlParams.get('q') || '*';
     const searchType = urlParams.get('type') || '';
     const searchYear = urlParams.get('year') || '';
     const sortOrder = urlParams.get('order') || 'relevance-desc';
+    const currentPage = parseInt(urlParams.get('page')) || 1;
 
-    // Update the UI with filtered data immediately using cached data
-    if (cachedData) {
-        setupUI(cachedData, searchQuery, sortOrder, newPage);
-    }
+    // Fetch updated search results
+    fetchSearchResults(searchQuery, searchType, searchYear, sortOrder, currentPage);
 }
-
-function updateResultsTitle(filteredDossiers, searchQuery, searchYear, searchType) {
-    let resultText = 'Alle dossiers';
-    
-    const hasFilters = searchQuery || searchYear || searchType;
-
-    if (hasFilters) {
-        if (filteredDossiers.length === 1) {
-            resultText = `${filteredDossiers.length} dossier`;
-        } else {
-            resultText = `${filteredDossiers.length} dossiers`;
-        }
-    }
-
-    document.querySelector('.search-results__title').innerText = resultText;
-}
-
-
-/**
- * Filters dossiers based on URL parameters such as search query, year, and type.
- * @param {Object} data - The data object containing all dossiers.
- * @param {string} searchQuery - The search query to filter by.
- * @param {string} sortOrder - The sort order parameter.
- * @param {string} searchYear - The year to filter by.
- * @param {string} searchType - The type to filter by.
- * @returns {Object} An object containing the filtered dossiers and the total count.
- */
-function filterDossiers(data, searchQuery, sortOrder, searchYear, searchType) {
-    try {
-        if (!data || !data.infobox || !Array.isArray(data.infobox.foi_dossiers)) {
-            console.error('Invalid data structure:', data);
-            throw new TypeError('data.infobox.foi_dossiers is not an array');
-        }
-
-        const filteredDossiers = data.infobox.foi_dossiers.filter(dossier => {
-            if (dossier.dc_type === '1e-i') {
-                return false; // Exclude dossiers with dc_type of '1e-i'
-            }
-
-            const title = dossier.dc_title ? dossier.dc_title.toLowerCase() : '';
-            const description = dossier.dc_description ? dossier.dc_description.toLowerCase() : '';
-
-            let matchesQuery = !searchQuery || title.includes(searchQuery.toLowerCase()) || description.includes(searchQuery.toLowerCase());
-
-            if (!matchesQuery && searchQuery) {
-                matchesQuery = dossier.foi_files.some(file => file.dc_title && file.dc_title.toLowerCase().includes(searchQuery.toLowerCase()));
-            }
-
-            const matchesYear = !searchYear || dossier.dc_date_year === parseInt(searchYear);
-            const matchesType = !searchType || dossier.dc_type === searchType;
-
-            if (matchesQuery && matchesYear && matchesType) {
-                console.log('Matched Dossier:', dossier);
-            }
-
-            return matchesQuery && matchesYear && matchesType;
-        });
-
-        const sortedDossiers = sortDossiers(filteredDossiers, sortOrder);
-
-        console.log('Filtered Dossiers:', sortedDossiers);
-        return { filteredDossiers: sortedDossiers, totalResults: sortedDossiers.length };
-    } catch (error) {
-        console.error('Error in filterDossiers:', error);
-        return { filteredDossiers: [], totalResults: 0 };
-    }
-}
-
-  /**
-   * Sets up breadcrumb navigation in the UI.
-   */
-   function setupBreadcrumbNavigation() {
-    // Displaying breadcrumb navigation as in your original script
-    let breadcrumbHtml = `
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 ml-0 mr-0 pr-0 pl-0">
-            <ol class="breadcrumb pr-0 pl-0">
-              <li class="breadcrumb-item">
-                <a href="https://opendata.nijmegen.nl/">Home</a>
-              </li>
-              <li class="breadcrumb-item active">
-                <a href="index.html">Woogle</a>
-              </li>
-            </ol>
-          </div>
-        </div>
-      </div>`;
-    document.getElementById('breadcrumb').innerHTML = breadcrumbHtml;
-  }
 
 /**
  * Creates and displays facets for filtering based on types, years, and topics from the dossier data.
  * @param {Array} filteredDossiers - The filtered array of dossiers.
  */
-function setupFacets(filteredDossiers) {
+function setupFacets(facets) {
     // Create a map to store counts of each facet
     const typeCounts = new Map();
     const yearCounts = new Map();
-    const topicCounts = new Map();
+    const publisherCounts = new Map();
 
-    // Count occurrences of each type, year, and topic in the filtered dossiers
-    filteredDossiers.forEach(dossier => {
-        // Count types
-        if (typeCounts.has(dossier.dc_type)) {
-            typeCounts.set(dossier.dc_type, typeCounts.get(dossier.dc_type) + 1);
-        } else {
-            typeCounts.set(dossier.dc_type, 1);
-        }
+    // Iterate over the facets to populate the maps
+    facets.forEach(facetGroup => {
+        Object.keys(facetGroup).forEach(facetKey => {
+            const facet = facetGroup[facetKey];
+            const facetName = facet.facet_name;
+            const facetValue = facet.value;
 
-        // Count years
-        if (yearCounts.has(dossier.dc_date_year)) {
-            yearCounts.set(dossier.dc_date_year, yearCounts.get(dossier.dc_date_year) + 1);
-        } else {
-            yearCounts.set(dossier.dc_date_year, 1);
-        }
-
-        // Count topics
-        const topic = dossier.tooiwl_topic || '';
-        if (topic) {
-            if (topicCounts.has(topic)) {
-                topicCounts.set(topic, topicCounts.get(topic) + 1);
+            // Check if the facetKey is a year (e.g., 2024, 2023, etc.)
+            if (!isNaN(facetKey)) {
+                yearCounts.set(facetKey, facetValue);
+            } else if (facetKey.startsWith('gm')) {
+                publisherCounts.set(facetName, facetValue);
             } else {
-                topicCounts.set(topic, 1);
+                typeCounts.set(facetKey, facetValue);
             }
-        }
+        });
     });
 
     // Generate HTML for facets with greyed out count
@@ -647,10 +699,10 @@ function setupFacets(filteredDossiers) {
         </li>
     `).join('');
 
-    const topicFacetHtml = Array.from(topicCounts).map(([topic, count]) => `
+    const publisherFacetHtml = Array.from(publisherCounts).map(([publisher, count]) => `
         <li class="facets__item">
-            <a class="facets__link" href="javascript:void(0)" onclick="updateFacetSelection('topic', '${topic}')">
-                ${capitalizeFirstLetter(topic)} <span class="woogle-grey">(${count})</span>
+            <a class="facets__link" href="javascript:void(0)" onclick="updateFacetSelection('publisher', '${publisher}')">
+                ${publisher} <span class="woogle-grey">(${count})</span>
             </a>
         </li>
     `).join('');
@@ -658,10 +710,14 @@ function setupFacets(filteredDossiers) {
     // Update the DOM with the generated HTML
     document.querySelector('.facets__types .facets__list').innerHTML = typeFacetHtml;
     document.querySelector('.facets__years .facets__list').innerHTML = yearFacetHtml;
-    document.querySelector('.facets__topics .facets__list').innerHTML = topicFacetHtml;
+    document.querySelector('.facets__publishers .facets__list').innerHTML = publisherFacetHtml;
 }
 
 
+/**
+ * Updates the query parameters in the URL when the sort order is changed.
+ * @param {string} newOrder - The new sort order to apply.
+ */
 /**
  * Updates the query parameters in the URL when the sort order is changed.
  * @param {string} newOrder - The new sort order to apply.
@@ -671,16 +727,12 @@ function updateQueryParams(newOrder) {
     urlParams.set('order', newOrder);
     urlParams.set('page', 1); // Reset to the first page whenever the sorting order is changed
 
-    // Update URL without reloading the page
-    history.pushState(null, '', '?' + urlParams.toString());
-
     // Retrieve updated URL parameters
-    const searchQuery = urlParams.get('q') || '';
+    const searchQuery = urlParams.get('q') || '*';
     const searchType = urlParams.get('type') || '';
     const searchYear = urlParams.get('year') || '';
+    const sortOrder = newOrder;
+    const currentPage = 1;
 
-    // Update the UI with filtered data immediately using cached data
-    if (cachedData) {
-        setupUI(cachedData, searchQuery, newOrder, 1);
-    }
+    fetchSearchResults(searchQuery, searchType, searchYear, sortOrder, currentPage);
 }

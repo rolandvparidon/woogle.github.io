@@ -57,7 +57,10 @@
     font-size: 1.5rem;
 }
 
-
+.card-block h4{
+    color: #a80a2d;
+    margin-top: 0.5rem;
+}
 
 
 
