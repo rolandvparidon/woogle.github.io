@@ -1,0 +1,675 @@
+{
+    "resource": "nl.gm0268.2c.2024",
+    "infobox": {
+        "foi_totalDossiers": 7,
+        "foi_dossiers": [
+            {
+                "dc_identifier": "nl.gm0268.2c.2024.2628403-2",
+                "dc_title": "Traianuskamer 2024-03-13 - Opiniëren - Veiligheidsbrief 2024",
+                "dc_type": "2c",
+                "dc_description": "Vergadering van de Gemeente Nijmegen op 2024-03-13. Onderdeel: Opiniëren - Veiligheidsbrief 2024.",
+                "dc_source": "https://nijmegen.bestuurlijkeinformatie.nl/Agenda/Index/83442e09-31d2-4e8a-af12-611a73aceb80",
+                "dc_publisher": "gm0268",
+                "dc_creator": "mlarooij",
+                "foi_nrDocuments": 5,
+                "foi_retrievedDate": "2024-03-25",
+                "foi_publishedDate": "2024-03-13",
+                "dc_date_year": 2024,
+                "dc_type_description": "Vergaderstuk decentrale overheid",
+                "foi_nrPagesInDossier": 60,
+                "foi_fairiscoreVersions": {
+                    "v1": 2,
+                    "v2": 2
+                },
+                "foi_files": [
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628403-2.doc.2",
+                        "dc_title": "Brief aan de raad Veiligheidsbrief 2024",
+                        "foi_fileName": "Brief%20aan%20de%20raad%20Veiligheidsbrief%202024.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=3e3a5482-dc7a-406f-af5b-6aa4c369ce28",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 19,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628403-2.doc.4",
+                        "dc_title": "Criminaliteitscijfers 2023",
+                        "foi_fileName": "Criminaliteitscijfers%202023.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=cbe6c165-bd3b-4e15-b4fd-ec4952ad1908",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 18,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628403-2.doc.5",
+                        "dc_title": "Infographic Ondermijning",
+                        "foi_fileName": "Infographic%20Ondermijning%20Nijmegen%202023.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=9f0b7e18-6cf4-4d37-8ced-b7eda998f537",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 1,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 2
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628403-2.doc.3",
+                        "dc_title": "Integraal Veiligheidsplan 2022-2026",
+                        "foi_fileName": "Notitie%20Samen%20veilig%20en%20weerbaar%20-%20Integraal%20veiligheidsplan%202022-2026%20(vastgesteld).pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=a10dbcea-6525-45dd-882d-1b34be6f1ca9",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 20,
+                        "foi_fairiscoreVersions": {
+                            "v1": 2,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628403-2.doc.1",
+                        "dc_title": "Voorblad - Opiniëren Veiligheidsbrief",
+                        "foi_fileName": "Voorblad%20Gemeente%20Nijmegen%20-%20opini%C3%ABren%20Veiligheidsbrief.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=85d177aa-a36a-4547-88b0-505bc0091e6a",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 2,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "dc_identifier": "nl.gm0268.2c.2024.2628403-3",
+                "dc_title": "Traianuskamer 2024-03-13 - Opiniëren - Debatstuk De Nijmeegse straathulpcoach, voor dak- en thuisloze mensen",
+                "dc_type": "2c",
+                "dc_description": "Vergadering van de Gemeente Nijmegen op 2024-03-13. Onderdeel: Opiniëren - Debatstuk De Nijmeegse straathulpcoach, voor dak- en thuisloze mensen.",
+                "dc_source": "https://nijmegen.bestuurlijkeinformatie.nl/Agenda/Index/83442e09-31d2-4e8a-af12-611a73aceb80",
+                "dc_publisher": "gm0268",
+                "dc_creator": "mlarooij",
+                "foi_nrDocuments": 3,
+                "foi_retrievedDate": "2024-03-25",
+                "foi_publishedDate": "2024-03-13",
+                "dc_date_year": 2024,
+                "dc_type_description": "Vergaderstuk decentrale overheid",
+                "foi_nrPagesInDossier": 12,
+                "foi_fairiscoreVersions": {
+                    "v1": 2,
+                    "v2": 1
+                },
+                "foi_files": [
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628403-3.doc.2",
+                        "dc_title": "Agendering straathulpcoach",
+                        "foi_fileName": "19%20februari%202024%20agendering%20straathulpcoach.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=47bbd7ad-8f66-40fc-8765-c55352cbed9b",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 1,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628403-3.doc.3",
+                        "dc_title": "Debatstuk straathulpcoach",
+                        "foi_fileName": "19%20februari%20debatstuk%20straathulpcoach.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=cfad4ea0-2a1c-4f5a-9682-60ccccf638b0",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 9,
+                        "foi_fairiscoreVersions": {
+                            "v1": 2,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628403-3.doc.1",
+                        "dc_title": "Voorblad - Opiniëren Straathulpcoach",
+                        "foi_fileName": "Voorblad%20Gemeente%20Nijmegen%20-%20opini%C3%ABren%20Straathulpcoach.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=4a3841b3-a7d3-41e3-8cdf-3ac244d142ac",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 2,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "dc_identifier": "nl.gm0268.2c.2024.2628401-1",
+                "dc_title": "Gebr. van Lymborchkamer 2024-03-13 - Inspraak diverse onderwerpen",
+                "dc_type": "2c",
+                "dc_description": "Vergadering van de Gemeente Nijmegen op 2024-03-13. Onderdeel: Inspraak diverse onderwerpen.",
+                "dc_source": "https://nijmegen.bestuurlijkeinformatie.nl/Agenda/Index/6fde34ee-2bcc-4d1a-b22f-bb97f25d2f76",
+                "dc_publisher": "gm0268",
+                "dc_creator": "HandelingScraper_v1",
+                "foi_nrDocuments": 5,
+                "foi_retrievedDate": "2024-03-26",
+                "foi_publishedDate": "2024-03-13",
+                "dc_date_year": 2024,
+                "dc_type_description": "Vergaderstuk decentrale overheid",
+                "foi_nrPagesInDossier": 11,
+                "foi_fairiscoreVersions": {
+                    "v1": 2,
+                    "v2": 2
+                },
+                "foi_files": [
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628401-1.doc.3",
+                        "dc_title": "20240306_brief aan de raad - R.Essers",
+                        "foi_fileName": "20240306_brief%20aan%20de%20raad%20-%20R.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=40f71fc2-6840-4bed-bf91-600c382dfdaf",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 4,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628401-1.doc.4",
+                        "dc_title": "brief emissiezones_geanonimiseerd",
+                        "foi_fileName": "brief%20emissiezones_geanonimiseerd.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=bf8f0d8f-5fa1-4845-963f-feba892e2066",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 4,
+                        "foi_fairiscoreVersions": {
+                            "v1": 2,
+                            "v2": 2
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628401-1.doc.5",
+                        "dc_title": "inspraakreactie koers van de binnenstad",
+                        "foi_fileName": "inspraakreactie%20koers%20van%20de%20binnenstad.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=0b8cfc23-8cee-4208-aaef-69f2d5c49b2b",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 1,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628401-1.doc.2",
+                        "dc_title": "Overzicht van insprekers 13 maart 2024",
+                        "foi_fileName": "Overzicht%20van%20insprekers%2013%20maart.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=63000b8e-c7e4-4514-8b0a-2ea8af2c66c7",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 1,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628401-1.doc.1",
+                        "dc_title": "Voorblad inspraak tips en spelregels",
+                        "foi_fileName": "Voorblad%20inspraak%20tips%20en%20spelregels.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=25a6e56c-574a-4b6e-be1f-b6628f90df8c",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 1,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "dc_identifier": "nl.gm0268.2c.2024.2628402-1",
+                "dc_title": "Raadzaal (gespreksrondes) 2024-03-13 - Inspraak diverse onderwerpen",
+                "dc_type": "2c",
+                "dc_description": "Vergadering van de Gemeente Nijmegen op 2024-03-13. Onderdeel: Inspraak diverse onderwerpen.",
+                "dc_source": "https://nijmegen.bestuurlijkeinformatie.nl/Agenda/Index/feea4333-d887-4a09-ab1b-5039bd4642ca",
+                "dc_publisher": "gm0268",
+                "dc_creator": "HandelingScraper_v1",
+                "foi_nrDocuments": 7,
+                "foi_retrievedDate": "2024-03-26",
+                "foi_publishedDate": "2024-03-13",
+                "dc_date_year": 2024,
+                "dc_type_description": "Vergaderstuk decentrale overheid",
+                "foi_nrPagesInDossier": 18,
+                "foi_fairiscoreVersions": {
+                    "v1": 2,
+                    "v2": 2
+                },
+                "foi_files": [
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-1.doc.4",
+                        "dc_title": "20240306_brief aan de raad - R.Essers",
+                        "foi_fileName": "20240306_brief%20aan%20de%20raad.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=5f103b5f-3eb5-470d-826a-22369c482a4b",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 4,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-1.doc.3",
+                        "dc_title": "brief emissiezones_geanonimiseerd",
+                        "foi_fileName": "brief%20emissiezones_geanonimiseerd.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=1d6919c5-89f3-46bd-953d-8b2d35cef733",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 4,
+                        "foi_fairiscoreVersions": {
+                            "v1": 2,
+                            "v2": 2
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-1.doc.5",
+                        "dc_title": "Document_2024-03-06_Brief binnenstad",
+                        "foi_fileName": "Document_2024-03-06_Brief%20binnenstad.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=7d49f72c-aa54-4e64-8fbb-442cfe33967c",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 3,
+                        "foi_fairiscoreVersions": {
+                            "v1": 5,
+                            "v2": 5
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-1.doc.7",
+                        "dc_title": "inspraakreactie koers van de binnenstad",
+                        "foi_fileName": "inspraakreactie%20koers%20van%20de%20binnenstad.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=e7564913-6e08-4bf6-89f3-686aa65c67dd",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 1,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-1.doc.2",
+                        "dc_title": "Overzicht van insprekers 13 maart 2024",
+                        "foi_fileName": "Overzicht%20van%20insprekers%2013%20maart.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=38e06ee1-5cc5-4a68-aafe-7e2f5506c436",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 1,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-1.doc.6",
+                        "dc_title": "presentatie inspraak DvhL 13mrt24",
+                        "foi_fileName": "presentatie%20inspraak%20DvhL%2013mrt24.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=46e69757-355e-4a68-b0de-e7e45bf734e1",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 4,
+                        "foi_fairiscoreVersions": {
+                            "v1": 2,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-1.doc.1",
+                        "dc_title": "Voorblad inspraak tips en spelregels",
+                        "foi_fileName": "Voorblad%20inspraak%20tips%20en%20spelregels.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=38200610-8979-45a5-841a-73af7cebb797",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 1,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "dc_identifier": "nl.gm0268.2c.2024.2628402-2",
+                "dc_title": "Raadzaal (gespreksrondes) 2024-03-13 - Advies besluitvorming - Raadsvoorstel Koers voor de Binnenstad",
+                "dc_type": "2c",
+                "dc_description": "Vergadering van de Gemeente Nijmegen op 2024-03-13. Onderdeel: Advies besluitvorming - Raadsvoorstel Koers voor de Binnenstad.",
+                "dc_source": "https://nijmegen.bestuurlijkeinformatie.nl/Agenda/Index/feea4333-d887-4a09-ab1b-5039bd4642ca",
+                "dc_publisher": "gm0268",
+                "dc_creator": "HandelingScraper_v1",
+                "foi_nrDocuments": 12,
+                "foi_retrievedDate": "2024-03-26",
+                "foi_publishedDate": "2024-03-13",
+                "dc_date_year": 2024,
+                "dc_type_description": "Vergaderstuk decentrale overheid",
+                "foi_nrPagesInDossier": 316,
+                "foi_fairiscoreVersions": {
+                    "v1": 2,
+                    "v2": 2
+                },
+                "foi_files": [
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-2.doc.10",
+                        "dc_title": "Brief d.d. 19 februari 2024 van Verschillende ondernemers inzake Noodzaak van parkeergelegenheid voor ondernemers in de binnenstad",
+                        "foi_fileName": "B10%20d.d.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=80960af4-dc7e-4bb0-8b57-11da2906167b",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 2,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-2.doc.9",
+                        "dc_title": "Brief d.d. 23 februari 2024 van Huis voor de Binnenstad inzake Reactie Koers voor de Binnenstad 2035",
+                        "foi_fileName": "B7%20d.d.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=c85249f2-e1bc-43ba-92a0-c8fc96a8e8f0",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 4,
+                        "foi_fairiscoreVersions": {
+                            "v1": 2,
+                            "v2": 2
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-2.doc.12",
+                        "dc_title": "Bijlage - Parkeren in de Nijmeegse binnenstad",
+                        "foi_fileName": "Bijlage%20-%20Parkeren%20in%20de%20Nijmeegse%20binnenstad%20-%20DEFINITIEF%20v3.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=5b3fd7ee-fd46-4ad2-add4-1b0efbe96ad1",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 43,
+                        "foi_fairiscoreVersions": {
+                            "v1": 2,
+                            "v2": 2
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-2.doc.11",
+                        "dc_title": "Bijlage - Relatie Mobiliteit en Bestedingen - centrum Nijmegen",
+                        "foi_fileName": "Bijlage%20-%20Relatie%20Mobiliteit%20en%20Bestedingen%20-%20centrum%20Nijmegen.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=95f9bf09-81d1-4e47-aa91-d27c79f5244f",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 13,
+                        "foi_fairiscoreVersions": {
+                            "v1": 2,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-2.doc.7",
+                        "dc_title": "Brief aan de raad Actieplan binnenstad 2023-2024",
+                        "foi_fileName": "Brief%20aan%20de%20raad%20Actieplan%20binnenstad%202023-2024.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=0eea80f5-ec00-44b3-a698-9edfc86d7fb1",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 2,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-2.doc.5",
+                        "dc_title": "Brief aan de raad Startnotitie Koers voor de Binnenstad",
+                        "foi_fileName": "Brief%20aan%20de%20raad%20Startnotitie%20Koers%20voor%20de%20Binnenstad.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=b5a3d222-d941-4fdd-995c-f085714c2035",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 2,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-2.doc.8",
+                        "dc_title": "Infographic Actieplan binnenstad 2023-2024",
+                        "foi_fileName": "Infographic%20Actieplan%20binnenstad%202023-2024.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=3c694e52-1e7a-4dfc-a55f-ef8531b3e146",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 1,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-2.doc.3",
+                        "dc_title": "Gebiedsvisie Koers voor de Binnenstad",
+                        "foi_fileName": "Koers%20voor%20de%20Binnenstad.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=d7c84c8c-0b1f-482c-adc8-d87db2d67788",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 231,
+                        "foi_fairiscoreVersions": {
+                            "v1": 2,
+                            "v2": 2
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-2.doc.4",
+                        "dc_title": "Persbericht Koers voor de Binnenstad",
+                        "foi_fileName": "Persbericht%20Koers%20voor%20de%20Binnenstad.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=a342ce38-a1c7-4ed0-b278-9061db2ba8da",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 2,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-2.doc.2",
+                        "dc_title": "Raadsvoorstel Koers voor de Binnenstad",
+                        "foi_fileName": "Raadsvoorstel%20Koers%20voor%20de%20Binnenstad.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=11d4579b-543b-4390-b18b-94f50a20b12b",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 6,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-2.doc.6",
+                        "dc_title": "Startnotitie Koers voor de Binnenstad",
+                        "foi_fileName": "Startnotitie%20%E2%80%9CKoers%20voor%20de%20Binnenstad%E2%80%9D.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=886a098b-7e77-4bb4-a50e-24ac9cb0ecd3",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 8,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-2.doc.1",
+                        "dc_title": "Voorblad - Raadsvoorstel Koers voor de Binnenstad",
+                        "foi_fileName": "Voorblad%20-%20Raadsvoorstel%20Koers%20voor%20de%20Binnenstad.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=7219fbef-8444-4406-a9dc-8cb7877b12e4",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 2,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "dc_identifier": "nl.gm0268.2c.2024.2628402-3",
+                "dc_title": "Raadzaal (gespreksrondes) 2024-03-13 - Opiniëren - Zero Emissiezones (op verzoek van Stadspartij Nijmegen en VVD)",
+                "dc_type": "2c",
+                "dc_description": "Vergadering van de Gemeente Nijmegen op 2024-03-13. Onderdeel: Opiniëren - Zero Emissiezones (op verzoek van Stadspartij Nijmegen en VVD).",
+                "dc_source": "https://nijmegen.bestuurlijkeinformatie.nl/Agenda/Index/feea4333-d887-4a09-ab1b-5039bd4642ca",
+                "dc_publisher": "gm0268",
+                "dc_creator": "HandelingScraper_v1",
+                "foi_nrDocuments": 6,
+                "foi_retrievedDate": "2024-03-26",
+                "foi_publishedDate": "2024-03-13",
+                "dc_date_year": 2024,
+                "dc_type_description": "Vergaderstuk decentrale overheid",
+                "foi_nrPagesInDossier": 20,
+                "foi_fairiscoreVersions": {
+                    "v1": 1,
+                    "v2": 1
+                },
+                "foi_files": [
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-3.doc.2",
+                        "dc_title": "Agenderingsverzoek VVD en Stadspartij Nijmegen (februari 2024)",
+                        "foi_fileName": "20240212%20agenderingsverzoek%20antwoorden%20schriftelijke%20vragen%20zero%20emissiezone.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=d5f19d9e-d4b5-492a-a282-e67e19e5078b",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 3,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-3.doc.6",
+                        "dc_title": "Brief d.d. 28 februari 2024 van Verschillende ondertekenaars inzake Brandbrief Zero Emissie betekent zero mobiele handel & vermaak",
+                        "foi_fileName": "B11%20d.d.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=6ed0e4ef-96f0-4f71-98bb-110729436fb4",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 2,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-3.doc.4",
+                        "dc_title": "Vragen Stadspartij Nijmegen en VVD - Zorgen over zero emissiezone",
+                        "foi_fileName": "Bijlage%201%20-Vragen%20Stadspartij%20Nijmegen%20en%20VVD%20-%20Zorgen%20over%20zero%20emissiezone.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=2349eff5-4318-47eb-a2b8-aff9328399be",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 3,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-3.doc.3",
+                        "dc_title": "Brief Beantwoording schriftelijke vragen Zorgen rond de zero-emissiezone",
+                        "foi_fileName": "Brief%20Beantwoording%20schriftelijke%20vragen%20Zorgen%20rond%20de%20zero-emissiezone.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=46fddc58-449c-4f18-aefd-9df47c5f14af",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 4,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-3.doc.5",
+                        "dc_title": "Raadsinformatiebrief Zero Emissiezones Stadslogistiek",
+                        "foi_fileName": "Raadsinformatiebrief%20Zero%20Emissiezones%20Stadslogistiek.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=1e16aebd-30f0-45e6-a279-07f0455c2cef",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 6,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628402-3.doc.1",
+                        "dc_title": "Voorblad - Opiniëren Zero Emissie Zones Stadslogistiek (ZES)",
+                        "foi_fileName": "Voorblad%20-%20Opini%C3%ABren%20Zero%20Emissie%20Zones%20Stadslogistiek%20(ZES.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=4c930921-aa5c-4236-ac61-d5b3a537925b",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 2,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "dc_identifier": "nl.gm0268.2c.2024.2628403-1",
+                "dc_title": "Traianuskamer 2024-03-13 - Vragenhalfuurtje",
+                "dc_type": "2c",
+                "dc_description": "Vergadering van de Gemeente Nijmegen op 2024-03-13. Onderdeel: Vragenhalfuurtje.",
+                "dc_source": "https://nijmegen.bestuurlijkeinformatie.nl/Agenda/Index/83442e09-31d2-4e8a-af12-611a73aceb80",
+                "dc_publisher": "gm0268",
+                "dc_creator": "mlarooij",
+                "foi_nrDocuments": 2,
+                "foi_retrievedDate": "2024-03-25",
+                "foi_publishedDate": "2024-03-13",
+                "dc_date_year": 2024,
+                "dc_type_description": "Vergaderstuk decentrale overheid",
+                "foi_nrPagesInDossier": 3,
+                "foi_fairiscoreVersions": {
+                    "v1": 1,
+                    "v2": 1
+                },
+                "foi_files": [
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628403-1.doc.1",
+                        "dc_title": "Vragen Vragenhalfuurtje - Vaccinatiegraad tegen mazelen",
+                        "foi_fileName": "Vragen%20Vragenhalfuurtje%20-%20Vaccinatiegraad%20tegen%20mazelen.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=ce1ca7ae-4b21-4a82-a19b-619eeea81b7a",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 1,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    },
+                    {
+                        "dc_identifier": "nl.gm0268.2c.2024.2628403-1.doc.2",
+                        "dc_title": "Vragen Vragenhalfuurtje - Warmtenet Dukenburg",
+                        "foi_fileName": "Vragen%20Vragenhalfuurtje%20-%20Warmtenet%20Dukenburg.pdf",
+                        "dc_type": "bijlage",
+                        "dc_source": "https://api1.ibabs.eu/publicdownload.aspx?site=Nijmegen&id=68348d3f-816e-49ad-9d75-bd7f746486ee",
+                        "dc_format": "application/pdf",
+                        "foi_nrPages": 2,
+                        "foi_fairiscoreVersions": {
+                            "v1": 1,
+                            "v2": 1
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

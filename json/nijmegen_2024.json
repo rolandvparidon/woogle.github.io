@@ -1,0 +1,344 @@
+{
+  "total_hits": 2145, 
+  "total_pages": 215, 
+  "results_per_page": 10, 
+  "parameters": {
+    "q": "*", 
+    "publisher_name": "Gemeente Nijmegen", 
+    "publisher": "gm0268", 
+    "country": "nl", 
+    "country_name": "Nederland", 
+    "year": "2024", 
+    "page": 1, 
+    "json": true, 
+    "order": "relevance-desc"
+  }, 
+  "hits": [
+    {
+      "dc_identifier": "nl.gm0268.2k.2024.2098", 
+      "dc_title": "Toestemming voor het realiseren van een lunchroom op de locatie Symfoniestraat 134 te Nijmegen zaaknummer AB24.00098", 
+      "dc_type": "2k", 
+      "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-213535", 
+      "dc_publisher": "gm0268", 
+      "dc_creator": "BeschikkingScraper_v1", 
+      "tooiwl_topic": "Ruimte en infrastructuur | Organisatie en beleid", 
+      "foi_nrDocuments": 1, 
+      "foi_retrievedDate": "2024-05-17", 
+      "foi_publishedDate": "2024-05-16", 
+      "foi_active": 1, 
+      "dc_date_year": 2024, 
+      "dc_publisher_name": "Gemeente Nijmegen", 
+      "foi_approved": 1, 
+      "tooiwl_rubriek": "omgevingsvergunning", 
+      "tooiwl_rubriekCode": "c_11b611a03", 
+      "dc_publisher_category": "Gemeente", 
+      "foi_country_code": "nl", 
+      "dc_type_description": "Beschikking", 
+      "foi_documents": [
+        {
+          "dc_identifier": "nl.gm0268.2k.2024.2098.doc.1", 
+          "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-213535.pdf", 
+          "dc_title": "Toestemming voor het realiseren van een lunchroom op de locatie Symfoniestraat 134 te Nijmegen zaaknummer AB24.00098", 
+          "foi_fileName": "gmb-2024-213535.pdf"
+        }
+      ]
+    }, 
+    {
+      "dc_identifier": "nl.gm0268.2k.2024.2099", 
+      "dc_title": "Aanvraag vergunning voor het bouwen van een fietsschuurtje in de voortuin op de locatie Mr. Franckenstraat 13 te Nijmegen zaaknummer AB24.00777", 
+      "dc_type": "2k", 
+      "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-213536", 
+      "dc_publisher": "gm0268", 
+      "dc_creator": "BeschikkingScraper_v1", 
+      "tooiwl_topic": "Ruimte en infrastructuur | Organisatie en beleid", 
+      "foi_nrDocuments": 1, 
+      "foi_retrievedDate": "2024-05-17", 
+      "foi_publishedDate": "2024-05-16", 
+      "foi_active": 1, 
+      "dc_date_year": 2024, 
+      "dc_publisher_name": "Gemeente Nijmegen", 
+      "foi_approved": 1, 
+      "tooiwl_rubriek": "omgevingsvergunning", 
+      "tooiwl_rubriekCode": "c_11b611a03", 
+      "dc_publisher_category": "Gemeente", 
+      "foi_country_code": "nl", 
+      "dc_type_description": "Beschikking", 
+      "foi_documents": [
+        {
+          "dc_identifier": "nl.gm0268.2k.2024.2099.doc.1", 
+          "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-213536.pdf", 
+          "dc_title": "Aanvraag vergunning voor het bouwen van een fietsschuurtje in de voortuin op de locatie Mr. Franckenstraat 13 te Nijmegen zaaknummer AB24.00777", 
+          "foi_fileName": "gmb-2024-213536.pdf"
+        }
+      ]
+    }, 
+    {
+      "dc_identifier": "nl.gm0268.2k.2024.2100", 
+      "dc_title": "Aanvraag vergunning voor het verwijderen van een draagmuur en plaatsen van een vervangende constructie op de locatie Albardastraat 30 te Nijmegen zaaknummer AB24.00772", 
+      "dc_type": "2k", 
+      "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-213950", 
+      "dc_publisher": "gm0268", 
+      "dc_creator": "BeschikkingScraper_v1", 
+      "tooiwl_topic": "Ruimte en infrastructuur | Organisatie en beleid", 
+      "foi_nrDocuments": 1, 
+      "foi_retrievedDate": "2024-05-17", 
+      "foi_publishedDate": "2024-05-16", 
+      "foi_active": 1, 
+      "dc_date_year": 2024, 
+      "dc_publisher_name": "Gemeente Nijmegen", 
+      "foi_approved": 1, 
+      "tooiwl_rubriek": "omgevingsvergunning", 
+      "tooiwl_rubriekCode": "c_11b611a03", 
+      "dc_publisher_category": "Gemeente", 
+      "foi_country_code": "nl", 
+      "dc_type_description": "Beschikking", 
+      "foi_documents": [
+        {
+          "dc_identifier": "nl.gm0268.2k.2024.2100.doc.1", 
+          "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-213950.pdf", 
+          "dc_title": "Aanvraag vergunning voor het verwijderen van een draagmuur en plaatsen van een vervangende constructie op de locatie Albardastraat 30 te Nijmegen zaaknummer AB24.00772", 
+          "foi_fileName": "gmb-2024-213950.pdf"
+        }
+      ]
+    }, 
+    {
+      "dc_identifier": "nl.gm0268.2k.2024.2101", 
+      "dc_title": "Aanvraag vergunning voor het onderkelderen van de woning en het realiseren van vossengaten op de locatie Postweg 143 te Nijmegen zaaknummer AB24.00776", 
+      "dc_type": "2k", 
+      "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-213951", 
+      "dc_publisher": "gm0268", 
+      "dc_creator": "BeschikkingScraper_v1", 
+      "tooiwl_topic": "Ruimte en infrastructuur | Organisatie en beleid", 
+      "foi_nrDocuments": 1, 
+      "foi_retrievedDate": "2024-05-17", 
+      "foi_publishedDate": "2024-05-16", 
+      "foi_active": 1, 
+      "dc_date_year": 2024, 
+      "dc_publisher_name": "Gemeente Nijmegen", 
+      "foi_approved": 1, 
+      "tooiwl_rubriek": "omgevingsvergunning", 
+      "tooiwl_rubriekCode": "c_11b611a03", 
+      "dc_publisher_category": "Gemeente", 
+      "foi_country_code": "nl", 
+      "dc_type_description": "Beschikking", 
+      "foi_documents": [
+        {
+          "dc_identifier": "nl.gm0268.2k.2024.2101.doc.1", 
+          "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-213951.pdf", 
+          "dc_title": "Aanvraag vergunning voor het onderkelderen van de woning en het realiseren van vossengaten op de locatie Postweg 143 te Nijmegen zaaknummer AB24.00776", 
+          "foi_fileName": "gmb-2024-213951.pdf"
+        }
+      ]
+    }, 
+    {
+      "dc_identifier": "nl.gm0268.2k.2024.2102", 
+      "dc_title": "Vergunning verleend - alcoholvergunning - Oosterhoutsedijk 16 te LENT", 
+      "dc_type": "2k", 
+      "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-213959", 
+      "dc_publisher": "gm0268", 
+      "dc_creator": "BeschikkingScraper_v1", 
+      "tooiwl_topic": "Ruimte en infrastructuur | Organisatie en beleid", 
+      "foi_nrDocuments": 1, 
+      "foi_retrievedDate": "2024-05-17", 
+      "foi_publishedDate": "2024-05-16", 
+      "foi_active": 1, 
+      "dc_date_year": 2024, 
+      "dc_publisher_name": "Gemeente Nijmegen", 
+      "foi_approved": 1, 
+      "tooiwl_rubriek": "andere beschikking", 
+      "tooiwl_rubriekCode": "c_11b611a06", 
+      "dc_publisher_category": "Gemeente", 
+      "foi_country_code": "nl", 
+      "dc_type_description": "Beschikking", 
+      "foi_documents": [
+        {
+          "dc_identifier": "nl.gm0268.2k.2024.2102.doc.1", 
+          "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-213959.pdf", 
+          "dc_title": "Vergunning verleend - alcoholvergunning - Oosterhoutsedijk 16 te LENT", 
+          "foi_fileName": "gmb-2024-213959.pdf"
+        }
+      ]
+    }, 
+    {
+      "dc_identifier": "nl.gm0268.2k.2024.2103", 
+      "dc_title": "Vergunning verleend - vergunning langs de 4-daagse route - Object en geluidsontheffing - Nabij Heiweg 1 te  Nijmegen - 19 juli 2024", 
+      "dc_type": "2k", 
+      "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-214186", 
+      "dc_publisher": "gm0268", 
+      "dc_creator": "BeschikkingScraper_v1", 
+      "tooiwl_topic": "Ruimte en infrastructuur | Organisatie en beleid", 
+      "foi_nrDocuments": 1, 
+      "foi_retrievedDate": "2024-05-17", 
+      "foi_publishedDate": "2024-05-16", 
+      "foi_active": 1, 
+      "dc_date_year": 2024, 
+      "dc_publisher_name": "Gemeente Nijmegen", 
+      "foi_approved": 1, 
+      "tooiwl_rubriek": "andere beschikking", 
+      "tooiwl_rubriekCode": "c_11b611a06", 
+      "dc_publisher_category": "Gemeente", 
+      "foi_country_code": "nl", 
+      "dc_type_description": "Beschikking", 
+      "foi_documents": [
+        {
+          "dc_identifier": "nl.gm0268.2k.2024.2103.doc.1", 
+          "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-214186.pdf", 
+          "dc_title": "Vergunning verleend - vergunning langs de 4-daagse route - Object en geluidsontheffing - Nabij Heiweg 1 te  Nijmegen - 19 juli 2024", 
+          "foi_fileName": "gmb-2024-214186.pdf"
+        }
+      ]
+    }, 
+    {
+      "dc_identifier": "nl.gm0268.2k.2024.2104", 
+      "dc_title": "Vergunning verleend - evenementenvergunning - Foodfestival de Vlindertuin - 25 mei 2024 - Hortus Nijmegen te Nijmegen", 
+      "dc_type": "2k", 
+      "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-214225", 
+      "dc_publisher": "gm0268", 
+      "dc_creator": "BeschikkingScraper_v1", 
+      "tooiwl_topic": "Ruimte en infrastructuur | Organisatie en beleid", 
+      "foi_nrDocuments": 1, 
+      "foi_retrievedDate": "2024-05-17", 
+      "foi_publishedDate": "2024-05-16", 
+      "foi_active": 1, 
+      "dc_date_year": 2024, 
+      "dc_publisher_name": "Gemeente Nijmegen", 
+      "foi_approved": 1, 
+      "tooiwl_rubriek": "andere beschikking", 
+      "tooiwl_rubriekCode": "c_11b611a06", 
+      "dc_publisher_category": "Gemeente", 
+      "foi_country_code": "nl", 
+      "dc_type_description": "Beschikking", 
+      "foi_documents": [
+        {
+          "dc_identifier": "nl.gm0268.2k.2024.2104.doc.1", 
+          "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-214225.pdf", 
+          "dc_title": "Vergunning verleend - evenementenvergunning - Foodfestival de Vlindertuin - 25 mei 2024 - Hortus Nijmegen te Nijmegen", 
+          "foi_fileName": "gmb-2024-214225.pdf"
+        }
+      ]
+    }, 
+    {
+      "dc_identifier": "nl.gm0268.2k.2024.2105", 
+      "dc_title": "Vergunning verleend - standplaatsvergunning op gemeentegrond - Verkoopwagen - Elke dinsdag 9-18 uur tot 14 mei 2036 - Jonagoldstraat plaats 1", 
+      "dc_type": "2k", 
+      "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-214319", 
+      "dc_publisher": "gm0268", 
+      "dc_creator": "BeschikkingScraper_v1", 
+      "tooiwl_topic": "Ruimte en infrastructuur | Organisatie en beleid", 
+      "foi_nrDocuments": 1, 
+      "foi_retrievedDate": "2024-05-17", 
+      "foi_publishedDate": "2024-05-16", 
+      "foi_active": 1, 
+      "dc_date_year": 2024, 
+      "dc_publisher_name": "Gemeente Nijmegen", 
+      "foi_approved": 1, 
+      "tooiwl_rubriek": "andere beschikking", 
+      "tooiwl_rubriekCode": "c_11b611a06", 
+      "dc_publisher_category": "Gemeente", 
+      "foi_country_code": "nl", 
+      "dc_type_description": "Beschikking", 
+      "foi_documents": [
+        {
+          "dc_identifier": "nl.gm0268.2k.2024.2105.doc.1", 
+          "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-214319.pdf", 
+          "dc_title": "Vergunning verleend - standplaatsvergunning op gemeentegrond - Verkoopwagen - Elke dinsdag 9-18 uur tot 14 mei 2036 - Jonagoldstraat plaats 1", 
+          "foi_fileName": "gmb-2024-214319.pdf"
+        }
+      ]
+    }, 
+    {
+      "dc_identifier": "nl.gm0268.2k.2024.2106", 
+      "dc_title": "Vergunning verleend - evenementenvergunning - Avondvierdaagse Nijmegen-Noord, Lent en Oosterhout - 28 t/m 31 mei 2024", 
+      "dc_type": "2k", 
+      "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-214364", 
+      "dc_publisher": "gm0268", 
+      "dc_creator": "BeschikkingScraper_v1", 
+      "tooiwl_topic": "Ruimte en infrastructuur | Organisatie en beleid", 
+      "foi_nrDocuments": 1, 
+      "foi_retrievedDate": "2024-05-17", 
+      "foi_publishedDate": "2024-05-16", 
+      "foi_active": 1, 
+      "dc_date_year": 2024, 
+      "dc_publisher_name": "Gemeente Nijmegen", 
+      "foi_approved": 1, 
+      "tooiwl_rubriek": "andere beschikking", 
+      "tooiwl_rubriekCode": "c_11b611a06", 
+      "dc_publisher_category": "Gemeente", 
+      "foi_country_code": "nl", 
+      "dc_type_description": "Beschikking", 
+      "foi_documents": [
+        {
+          "dc_identifier": "nl.gm0268.2k.2024.2106.doc.1", 
+          "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-214364.pdf", 
+          "dc_title": "Vergunning verleend - evenementenvergunning - Avondvierdaagse Nijmegen-Noord, Lent en Oosterhout - 28 t/m 31 mei 2024", 
+          "foi_fileName": "gmb-2024-214364.pdf"
+        }
+      ]
+    }, 
+    {
+      "dc_identifier": "nl.gm0268.2k.2024.2107", 
+      "dc_title": "Ingetrokken aanvraag omgevingsvergunning voor het vervangen van bestaande ramen door dun isolatieglas op de locatie Wilhelminasingel 34 te Nijmegen zaaknummer AB24.00465", 
+      "dc_type": "2k", 
+      "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-214475", 
+      "dc_publisher": "gm0268", 
+      "dc_creator": "BeschikkingScraper_v1", 
+      "tooiwl_topic": "Ruimte en infrastructuur | Organisatie en beleid", 
+      "foi_nrDocuments": 1, 
+      "foi_retrievedDate": "2024-05-17", 
+      "foi_publishedDate": "2024-05-16", 
+      "foi_active": 1, 
+      "dc_date_year": 2024, 
+      "dc_publisher_name": "Gemeente Nijmegen", 
+      "foi_approved": 1, 
+      "tooiwl_rubriek": "omgevingsvergunning", 
+      "tooiwl_rubriekCode": "c_11b611a03", 
+      "dc_publisher_category": "Gemeente", 
+      "foi_country_code": "nl", 
+      "dc_type_description": "Beschikking", 
+      "foi_documents": [
+        {
+          "dc_identifier": "nl.gm0268.2k.2024.2107.doc.1", 
+          "dc_source": "https://zoek.officielebekendmakingen.nl/gmb-2024-214475.pdf", 
+          "dc_title": "Ingetrokken aanvraag omgevingsvergunning voor het vervangen van bestaande ramen door dun isolatieglas op de locatie Wilhelminasingel 34 te Nijmegen zaaknummer AB24.00465", 
+          "foi_fileName": "gmb-2024-214475.pdf"
+        }
+      ]
+    }
+  ], 
+  "facets": [
+    {
+      "gm0268": {
+        "facet_name": "Gemeente Nijmegen", 
+        "value": 2145
+      }
+    }, 
+    {
+      "2024": {
+        "facet_name": 2024, 
+        "value": 2145
+      }
+    }, 
+    {
+      "2k": {
+        "facet_name": "Beschikking", 
+        "value": 2107
+      }, 
+      "2i": {
+        "facet_name": "Dossier na Woo/Wob-verzoek", 
+        "value": 28
+      }, 
+      "2c": {
+        "facet_name": "Vergaderstuk decentrale overheid", 
+        "value": 7
+      }, 
+      "1e": {
+        "facet_name": "Bereikbaarheidsgegevens", 
+        "value": 2
+      }, 
+      "1e-i": {
+        "facet_name": "Verwijsindex", 
+        "value": 1
+      }
+    }
+  ]
+}
