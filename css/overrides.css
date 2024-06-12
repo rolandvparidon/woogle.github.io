@@ -1,0 +1,269 @@
+/**
+ * Contains various minor fixes to ensure interoperability between Drupal and the Nijmegen
+ * component-library (componenten.nijmegen.nl).
+ */
+
+/*
+ * Ensure the outline of links on the page are in accordance with WCAG 1.4.11
+ * (https://www.w3.org/Translations/WCAG21-nl/#contrast-van-niet-tekstuele-content).
+ */
+a:focus {
+  outline: 1px solid #17564A !important;
+}
+.navbar-brand:focus,
+.navbar-nav .nav-item a:focus,
+.page-footer a:focus {
+  outline: 1px solid #00ECC0 !important;
+}
+
+/*
+ * Ensure contact block has similar 'grey' background as nijmegen.nl has. Class is not present
+ * in component-library.
+ */
+.bg-grey {
+  background: #EFEFEF;
+}
+
+/*
+ * Fix navigation-item teleporting on hover by ensuring that non-hover has a similar border.
+ */
+.navbar-nav .nav-item a {
+  border-bottom: 1px solid #A80A2D;
+}
+
+/*
+ * Give the front-page its 'iconic' background image, which is similar to what nijmegen.nl has.
+ * Asset is not present in the component-library, therefore a local version will be used.
+ */
+.path-frontpage {
+  background-image: url("/themes/custom/odn_theme/images/Homepage_Foto.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/*
+ * The background-color provided by the component-library has a contrast ratio of 4.3 : 1.
+ * Removing the background-color raises the ratio to 5.1 : 1. This meets the WCAG criteria
+ * for AA rating.
+ */
+.breadcrumb {
+  background: none;
+}
+
+/*
+ * Ensure links within a block with the 'bg-grey' class follow the contrast ratio guidelines
+ * provided by WCAG to meet the AAA criteria (min 7 : 1, actual 7.4 : 1). Without this change
+ * the contrast ratio will not meet the AA criteria.
+ */
+.bg-grey-contrast a {
+  color: #17564A;
+}
+.bg-grey-contrast a:hover,
+.bg-grey-contrast a:active {
+  text-decoration: underline;
+}
+
+/*
+ * Component-library sets the display to none for some reason.
+ */
+.invalid-feedback {
+  display: inherit !important;
+}
+
+/*
+ * Ensure an underline effect is present on :hover and :active states of links on the page in
+ * accordance with WCAG 1.4.1 (https://www.w3.org/Translations/WCAG21-nl/#gebruik-van-kleur).
+ */
+dd > a:hover,
+dd > a:active,
+td a:hover,
+td a:active,
+.breadcrumb-item > a:hover,
+.breadcrumb-item > a:active,
+.facets__link:hover,
+.facets__link:active,
+.search-results__item-link:hover,
+.search-results__item-link:active,
+.card-services > a:hover .card-title,
+.card-services > a:active .card-title {
+  text-decoration: underline;
+}
+
+/**
+ * 'Special' chip for the reference to data.overheid.nl.
+ */
+.donl-chip {
+  background: #E5F1F9;
+}
+.donl-chip img {
+  margin-right: 0 !important;
+}
+
+/*
+ * Bring back the font-size of the Bootstrap tooltips to a more reasonable size.
+ */
+div.tooltip > div.tooltip-inner {
+  font-size: 1rem !important;
+}
+
+.carousel-image-constrained {
+  border-radius: 5px;
+}
+
+.dataset-title {
+  word-break: break-word;
+}
+
+img.image-faded {
+  opacity: 75%;
+}
+
+li.osm-nijmegen-background {
+  background: url("/themes/custom/odn_theme/images/osm-nijmegen.png");;
+  background-size: cover;
+}
+
+.login-actions-container {
+  display: flex;
+  flex-direction: column;
+}
+
+@media(min-width: 768px) {
+  .carousel {
+    width: 75%;
+  }
+
+  .dataset-body {
+    padding-right: 25px;
+  }
+}
+
+/*
+ * Remove padding from bootstrap column when rendering the Swagger UI.
+ */
+.swagger-ui .col-12 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.swagger-ui .title {
+  font-size: 2.375rem !important;
+  font-family: Oranda, sans-serif !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  color: #212121 !important;
+}
+
+.openid-connect-login-form .button.third-party-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: #000;
+  background: #fff;
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px 3px #E5E5E5;
+  border: 1px solid #666;
+  margin-bottom: 46px;
+  margin-top: 50px;
+}
+
+.openid-connect-login-form .button.third-party-login:hover,
+.openid-connect-login-form .button.third-party-login:active {
+   background: #f2f2f2;
+   box-shadow: 3px 3px 3px 3px #BBB;
+}
+
+.openid-connect-login-form .third-party-logo {
+  width: 150px;
+}
+
+.login-form-divider-container {
+  margin-bottom: 50px;
+  width: 100%;
+  height: 20px;
+  line-height: 36px;
+  border-bottom: 1px solid #757575;
+  text-align: center;
+}
+
+.login-form-divider {
+  color: #757575;
+  font-size: 20px;
+  background-color: #FFF;
+  padding: 0 10px;
+  font-style: italic;
+}
+
+.page-footer .divider {
+  border-top: 1px solid white;
+}
+
+/** admin controls **/
+#block-admincontrols {
+  position: sticky;
+  bottom: 10px;
+  width: 100%;
+  pointer-events: none;
+}
+
+.horizontal-collapse .btn-floating-collapse {
+  pointer-events: all;
+}
+
+.dataset:before {
+  /* mdi mdi-database*/
+  content: '\F01BC';
+}
+
+.add-page:before {
+  /* mdi mdi-note-plus*/
+  content: '\F039C';
+}
+
+.horizontal-collapse .expand-horizontal {
+  border-radius: 25px 0 0 25px;
+  top: 16px;
+  height: 44px;
+}
+
+.horizontal-collapse .expand-horizontal li {
+  pointer-events: all;
+  margin: 0;
+}
+
+.horizontal-collapse .expand-horizontal li.admin-controls-item.text {
+  margin-right: 10px;
+}
+
+.horizontal-collapse .expand-horizontal li.admin-controls-item a {
+  color: white;
+  display: flex;
+  gap: 5px;
+  padding: 0 10px;
+}
+
+.horizontal-collapse .expand-horizontal li.btn-floating-wrapper {
+  width: 90px;
+}
+
+.admin-controls-item a:hover {
+  text-decoration: underline;
+  background: #30a08b;
+}
+
+.admin-controls-item a span.mdi,
+.admin-controls-item a i.mdi {
+  font-size: 1rem;
+}
+
+@keyframes turn-cog-wheel {
+  from {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(0);
+  }
+}
