@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Municipality Woogle Customization</title>
+  <link rel="stylesheet" href="woogle.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Customize Your Municipality Woogle Site</h1>
+    <div class="form-group">
+      <label for="municipality">Select Municipality:</label>
+      <select id="municipality" onchange="updatePublisher()">
+        <option value="">Select a municipality...</option>
+        <!-- Options will be populated dynamically -->
+      </select>
+    </div>
+    <button onclick="generateFiles()">Generate</button>
+  </div>
+
+  <script src="woogle.js"></script>
+</body>
+</html>
