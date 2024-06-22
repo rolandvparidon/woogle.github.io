@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     fetchMunicipalities();
   
     function fetchMunicipalities() {
-      fetch('http://localhost:3000/api/municipalities')
+      fetch('/api/municipalities')
         .then(response => response.json())
         .then(data => {
           const municipalities = data.infobox;

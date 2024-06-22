@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "../main/index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "../main/woogle.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "../main/woogle.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "proxy.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/woogle-proxy/proxy.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/main/$1"
+    }
+  ]
+}
